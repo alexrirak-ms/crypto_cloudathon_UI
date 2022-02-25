@@ -1,0 +1,34 @@
+<div id="headerTitle">
+	<span class="title">Morgan Stanley Online</span>
+</div>
+<div>
+	<!-- side bar elements -->
+	<div style="width: 250px; background-color: #01325d; height: 100%; position: fixed; padding-top: 200px;">
+	<div class="sa-tab sa-tabs-left">
+		<ul class="nav-vertical-tabs nav-tabs">
+			<li class="clickable" (click)="tabSwitch('portfolio')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+				<a [routerLink]="'portfolio'">Portfolio</a>
+			</li>
+			<li class="clickable" (click)="tabSwitch('earnRewards')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+				<a [routerLink]="'earnRewards'">Earn Rewards</a>
+			</li>
+			<li class="clickable" (click)="tabSwitch('buySell')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+				<a [routerLink]="'buySell'">Buy & Sell</a>
+			</li>
+			<li class="clickable" (click)="tabSwitch('sendReceive')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+				<a [routerLink]="'sendReceive'">Send & Receive</a>
+			</li>
+			<li class="clickable" (click)="tabSwitch('borrow')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+				<a [routerLink]="'borrow'">Borrow</a>
+			</li>
+
+		</ul>
+	</div>
+</div>
+</div>
+<main role="main" class="container">
+	<div [style.position]="'relative'">
+		<router-outlet></router-outlet>
+
+	</div>
+</main>

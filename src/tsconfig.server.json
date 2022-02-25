@@ -1,0 +1,20 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "../dist-server/",
+    "baseUrl": "./",
+    "module": "commonjs",
+    "types": []
+  },
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ],
+  "angularCompilerOptions": {
+    "entryModule": "app/app.server.module#AppServerModule",
+    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
+  }
+}

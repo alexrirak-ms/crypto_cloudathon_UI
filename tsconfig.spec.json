@@ -1,0 +1,25 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "./out-tsc/spec",
+    "types": [
+      "jasmine",
+      "node"
+    ]
+  },
+  "angularCompilerOptions": {
+    "esModuleInterop": true,
+    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true
+  },
+  "files": [
+    "src/test.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.d.ts"
+  ]
+}
