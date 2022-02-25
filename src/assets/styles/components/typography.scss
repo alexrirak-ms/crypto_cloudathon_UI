@@ -1,0 +1,108 @@
+@import "vars";
+
+body {
+
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	
+	
+}
+
+h1 {
+	
+	font-weight: 300;
+	line-height: 1;
+	letter-spacing: -0.04em;
+
+	&.small {
+		font-size: 1.6em;
+	}
+}
+
+h2 {
+	font-size: 2.5rem;
+	font-weight: 400;
+	line-height: 1.35;
+	letter-spacing: -0.02em;
+}
+
+h3 {
+	font-size: 1.5em;
+	font-weight: 400;
+	line-height: 48px;
+}
+
+a {
+	
+	text-shadow: none;
+	text-decoration: none;
+	outline: 0 !important;
+
+	&:active,
+	&:focus,
+	&:hover {
+		
+	}
+}
+
+ol,
+ul {
+	margin-top: 0;
+
+	> li {
+		padding-left: 3px;
+		line-height: 24px;
+	}
+}
+
+.text-muted {
+	opacity: 0.7;
+}
+
+b,
+strong {
+	font-weight: 600;
+}
+
+.text-accent {
+	
+}
+
+a {
+	&.text-accent {
+		&:active,
+		&:focus,
+		&:hover {
+
+		}
+	}
+}
+
+input {
+	
+}
+
+.text {
+	&--right {
+		text-align: right;
+	}
+
+	&--left {
+		text-align: left;
+	}
+
+	&--center {
+		text-align: center;
+	}
+
+	&--small {
+		font-size: 0.813em;
+	}
+}

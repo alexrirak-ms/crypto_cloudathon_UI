@@ -1,0 +1,61 @@
+@import "vars";
+
+
+:host {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+main {
+	display: flex;
+	flex: 1;
+	flex-flow: column;
+	min-height: 100%;
+	margin-top: 5em;
+}
+
+// sidenav-menu {
+// 	width: $layout-navbar-width-size;
+// 	min-width: $layout-navbar-width-size;
+// }
+footer {
+	width: 100%;
+	min-height: 64px;
+	
+
+	.fa-heart {
+		
+	}
+
+	> .container {
+		padding: 0 15px;
+
+		p {
+			text-align: center;
+			margin: 20px 0;
+		}
+	}
+}
+#headerTitle{
+	background-color: #2f5ec7;
+	height: 60px;
+	border-bottom: 1px solid #000000;
+	clear: both;
+}
+.title{
+	font-size: 2.7rem;
+	margin-left: 10px;
+	color: white;
+	vertical-align: middle;
+}
+.nav-tabs{
+	font-size: 12px;
+	line-height: 12px;
+	font-weight: 400;
+	border:1px solid white;
+}
+.sa-active{
+	font-weight: 800;
+	background-color: white;
+}
