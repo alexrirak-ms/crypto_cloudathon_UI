@@ -15,7 +15,7 @@ export class SendReceiveComponent implements OnInit {
 	componentString: string = "";
 	componentConfig: any = {};
 	data: any = [];
-	rowData:any = [];
+	rowData:any;
 	private gridApi!: GridApi;
 	columnDefs = [
 		{headerName: 'Name', field: 'name'},
@@ -36,6 +36,7 @@ export class SendReceiveComponent implements OnInit {
 				this.data = data;
 
 				this.data.forEach((value: any) => {
+					if (!this.rowData) {this.rowData = []}
 					this.rowData.push({name: value['name'], balance: value['balances']['total_balance'] / 100000000, usd_balance: 0})
 				})
 				this.gridApi.setRowData(this.rowData);
