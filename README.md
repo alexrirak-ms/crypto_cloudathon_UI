@@ -1,5 +1,7 @@
-# Angular Skeleton App
-Angular 10.x navigation skeleton project with styling which get you started faster.
+# Crypto Banksters UI
+[Azure Link](https://crypto-banksters-ui.azurewebsites.net/)
+
+[![Build and deploy to Azure Web App - crypto-banksters-ui](https://github.com/alexrirak-ms/crypto_cloudathon_UI/actions/workflows/main_crypto-banksters-ui.yml/badge.svg)](https://github.com/alexrirak-ms/crypto_cloudathon_UI/actions/workflows/main_crypto-banksters-ui.yml)
 
 ## What does it have?
  - Angular CLI 10.x template
@@ -10,11 +12,6 @@ Angular 10.x navigation skeleton project with styling which get you started fast
  - Linting/formatting - prettier, tslint, eslint, stylelint
  - Circle CI 2 integration
 
- ![Angular Skeleton App](./screenshot.jpg)
-
- ## todo
-  - SSR server
-  - docker image
 
 # Getting Started
 
