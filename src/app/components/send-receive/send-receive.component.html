@@ -1,3 +1,22 @@
 <div>
-	Send Receive component
+	<div class="container">
+		<h2 class="pb-2 border-bottom">Send and Receive</h2>
+
+		<h3>Your Assets:</h3>
+		<ag-grid-angular
+			style="width: 100%;"
+			class="ag-theme-balham"
+			domLayout='autoHeight'
+			[rowData]="rowData"
+			[columnDefs]="columnDefs"
+			[defaultColDef]="defaultColDef"
+		>
+		</ag-grid-angular>
+
+		<div class="grid-wrapper">
+				<div id="myGrid" style="height: 100%" class="ag-theme-alpine">
+				</div>
+			</div>
+
+	</div>
 </div>
