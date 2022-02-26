@@ -8,6 +8,6 @@ export class SendReceiveApiService {
 	}
 
 	getSendReceiveInitData(user: string) {
-		return this.http.get("http://crypto-banksters-wallet-api.azurewebsites.net/wallets/user/" + user + "?include_values=True")
+		return this.http.get("//crypto-banksters-wallet-api.azurewebsites.net/wallets/user/" + user + "?include_values=True")
 	}
 }
