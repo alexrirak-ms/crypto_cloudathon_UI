@@ -19,6 +19,9 @@
 
 Run `npm start` to start developing.
 
+### To Bypass CORS
+`"C:\Program Files\Google\Chrome\Application\chrome.exe" --disable-web-security --disable-gpu --user-data-dir="/Temp/chrome_dev_test"`
+
 ## Build and run production
 
 Run `npm run start:prod` build and run for production.

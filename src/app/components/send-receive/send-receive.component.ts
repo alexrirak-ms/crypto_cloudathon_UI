@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from "@angular/core";
 import {CurrencyPipe} from "@angular/common";
 import {SendReceiveApiService} from "../../services/index"
 import {PopupComponent} from "../popup/popup.component"
+import {GridApi, GridReadyEvent} from "ag-grid-community";
 
 @Component({
 	selector: "send-receive",
@@ -13,35 +14,44 @@ export class SendReceiveComponent implements OnInit {
 	@ViewChild(PopupComponent) private messageModal: PopupComponent;
 	componentString: string = "";
 	componentConfig: any = {};
-	data: any = {};
-	constructor(private SendReceiveApiService: SendReceiveApiService) {
-
-	}
-	ngOnInit() {
-		//Nothing for now
-		this.SendReceiveApiService.getSendReceiveInitData(null).subscribe(
-			data => {
-				console.log(data)
-				this.data = data;
-			},
-			error => {
-				this.messageModal.show("Error occurred while pulling Borrow data")
-				console.log(error)
-			}
-		);
-	}
-
+	data: any = [];
+	rowData:any = [];
+	private gridApi!: GridApi;
 	columnDefs = [
 		{headerName: 'Name', field: 'name'},
 		{headerName: 'Balance', field: 'balance'},
 		{headerName: 'USD Balance', field: 'usd_balance'}
 	];
 
-	rowData = [
-		{name: 'Bitcoin', balance: 1, usd_balance: 35000},
-		{name: 'Ethereum', balance: 2, usd_balance: 32000},
-		{name: 'Litecoin', balance: 3, usd_balance: 72000}
-	];
+	constructor(private SendReceiveApiService: SendReceiveApiService) {
+
+	}
+
+	ngOnInit() {
+		//Nothing for now
+		//TODO: this user id should not be hardcoded
+		this.SendReceiveApiService.getSendReceiveInitData("e16666ff-c559-4aab-96eb-f0a5c2c77b18").subscribe(
+			data => {
+				console.log(data);
+				this.data = data;
+
+				this.data.forEach((value: any) => {
+					this.rowData.push({name: value['name'], balance: value['balances']['total_balance'] / 100000000, usd_balance: 0})
+				})
+				this.gridApi.setRowData(this.rowData);
+
+			},
+			error => {
+				this.messageModal.show("Error occurred while pulling asset data")
+				console.log(error);
+			}
+		);
+
+	}
+
+	onGridReady(params: GridReadyEvent) {
+		this.gridApi = params.api;
+	}
 
 	defaultColDef = {
 		resizable: true,
