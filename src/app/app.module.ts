@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { AgGridModule } from 'ag-grid-angular';
 
 import { environment } from "../environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
@@ -14,13 +15,13 @@ import { BuySellComponent, SendReceiveComponent, PopupComponent, PortfolioCompon
 import { BuySellApiService, SendReceiveApiService, PortfolioApiService, RewardsApiService, BorrowApiService } from './services/index'
 //import { HighchartsChartModule } from 'highcharts-angular';
 @NgModule({
-	declarations: [AppComponent, 
+	declarations: [AppComponent,
 		BuySellComponent,
 		SendReceiveComponent,
 		PortfolioComponent,
 		EarnRewardsComponent,
 		BorrowComponent,
-		PopupComponent,	
+		PopupComponent,
 		...AREAS_COMPONENTS],
 	imports: [
 		// vendors
@@ -29,6 +30,7 @@ import { BuySellApiService, SendReceiveApiService, PortfolioApiService, RewardsA
 		HttpClientModule,
 		ServiceWorkerModule.register("/ngsw-worker.js", { enabled: environment.production }),
 		BrowserTransferStateModule,
+		AgGridModule,
 		//HighchartsChartModule,
 
 		// app
