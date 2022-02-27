@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
 		this.tabs.push(new TabData('buySell', 'Buy & Sell'))
 		this.tabs.push(new TabData('sendReceive', 'Send & Receive'))
 		this.tabs.push(new TabData('borrow', 'Borrow'))
+		this.tabs.push(new TabData('login', 'Login'))
 	}
 	
 	tabSwitch(tab: string){

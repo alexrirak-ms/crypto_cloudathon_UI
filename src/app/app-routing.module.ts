@@ -6,6 +6,7 @@ import{
 	BuySellComponent,
 	BorrowComponent,
 	SendReceiveComponent,
+	LoginComponent,
 	//PopupComponent,
 	EarnRewardsComponent
 	
@@ -30,6 +31,10 @@ const routes : Routes = [
 	{
 		path: 'borrow',
 		component: BorrowComponent
+	},
+	{
+		path: 'login',
+		component: LoginComponent
 	},
 	
 ]
