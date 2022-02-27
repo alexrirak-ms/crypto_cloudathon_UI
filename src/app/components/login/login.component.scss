@@ -1,38 +1,41 @@
-@import "vars";
+.logindiv {
+	background: #e2e2e2;
+	width: 600px;
+	height: 600px;
+	position: absolute;
+	top: 50%;
+	left: 25%;
+	bottom: 50%;
+  }
 
-:host {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
+  body {
+    margin: 0;
+    padding: 0;
+    text-align: center; /* !!! */
 }
+  
+  .div-center {
+	width: 400px;
+	height: 400px;
+	background-color: #fff;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 50%;
+	bottom: 50%;
+	margin: auto;
+	max-width: 100%;
+	max-height: 100%;
+	overflow: auto;
+	padding: 1em 2em;
+	border-bottom: 2px solid #ccc;
+	display: table;
+  }
+  
+  div.content {
+	display: table-cell;
+	// vertical-align: middle;
 
-main {
-	display: flex;
-	flex: 1;
-	flex-flow: column;
-	min-height: 100%;
-	margin-top: 5em;
-}
-
-// sidenav-menu {
-// 	width: $layout-navbar-width-size;
-// 	min-width: $layout-navbar-width-size;
-// }
-footer {
-	width: 100%;
-	min-height: 64px;
 	
 
-	.fa-heart {
-		
-	}
-
-	> .container {
-		padding: 0 15px;
-
-		p {
-			text-align: center;
-			margin: 20px 0;
-		}
-	}
-}
+  }
