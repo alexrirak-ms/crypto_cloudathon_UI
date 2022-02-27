@@ -20,7 +20,7 @@ export class SendReceiveComponent implements OnInit {
 	columnDefs = [
 		{headerName: 'Name', field: 'name'},
 		{headerName: 'Balance', field: 'balance'},
-		{headerName: 'USD Balance', field: 'usd_balance'}
+		{headerName: 'USD Balance', field: 'usd_balance', valueFormatter: params => this.currencyFormatter(params.data.usd_balance, '$')}
 	];
 
 	constructor(private SendReceiveApiService: SendReceiveApiService) {
@@ -37,10 +37,19 @@ export class SendReceiveComponent implements OnInit {
 
 				this.data.forEach((value: any) => {
 					if (!this.rowData) {this.rowData = []}
-					this.rowData.push({name: value['name'], balance: value['balances']['total_balance'] / 100000000, usd_balance: 0})
-				})
-				this.gridApi.setRowData(this.rowData);
 
+					this.SendReceiveApiService.getCoinValue(value['symbol']).subscribe(
+						usd_value => {
+							var balance = value['balances']['total_balance'] / 100000000
+
+							// push in the new row
+							this.rowData.push({name: value['name'], balance: balance + " " + value['symbol'].toUpperCase(), usd_balance: balance * usd_value})
+							//redraw rows so that the grid reloads
+							this.gridApi.setRowData(this.rowData);
+						}
+					)
+
+				})
 			},
 			error => {
 				this.messageModal.show("Error occurred while pulling asset data")
@@ -59,5 +68,11 @@ export class SendReceiveComponent implements OnInit {
 		sortable: true,
 		flex: 1
 	};
+
+	currencyFormatter(currency, sign) {
+	  var sansDec = currency.toFixed(0);
+	  var formatted = sansDec.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	  return sign + `${formatted}`;
+	}
 
 }
