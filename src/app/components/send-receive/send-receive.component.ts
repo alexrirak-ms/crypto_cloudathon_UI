@@ -20,7 +20,7 @@ export class SendReceiveComponent implements OnInit {
 	columnDefs = [
 		{headerName: 'Name', field: 'name'},
 		{headerName: 'Balance', field: 'balance'},
-		{headerName: 'USD Balance', field: 'usd_balance', valueFormatter: params => this.currencyFormatter(params.data.usd_balance, '$')}
+		{headerName: 'USD Balance', field: 'usd_balance', valueFormatter: (params: any) => this.currencyFormatter(params.data.usd_balance, '$')}
 	];
 
 	constructor(private SendReceiveApiService: SendReceiveApiService) {
@@ -40,10 +40,11 @@ export class SendReceiveComponent implements OnInit {
 
 					this.SendReceiveApiService.getCoinValue(value['symbol']).subscribe(
 						usd_value => {
-							var balance = value['balances']['total_balance'] / 100000000
+							var balance: number = value['balances']['total_balance'] / 100000000
 
 							// push in the new row
-							this.rowData.push({name: value['name'], balance: balance + " " + value['symbol'].toUpperCase(), usd_balance: balance * usd_value})
+							var usd_balance: number = balance * <number> usd_value
+							this.rowData.push({name: value['name'], balance: balance + " " + value['symbol'].toUpperCase(), usd_balance: usd_balance})
 							//redraw rows so that the grid reloads
 							this.gridApi.setRowData(this.rowData);
 						}
