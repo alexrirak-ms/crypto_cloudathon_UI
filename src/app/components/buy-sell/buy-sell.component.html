@@ -1,3 +1,70 @@
-<div>
-	Buy sell component
-</div>
+<h2 class="pb-2 border-bottom">Buy / Sell</h2>
+<fieldset>
+  <legend>Your watchlist</legend>
+  <div>
+  <ag-grid-angular
+        style="width: 100%;"
+        class="ag-theme-balham"
+        domLayout='autoHeight'
+        [rowData]="rowData"
+        [columnDefs]="columnDefs"
+        [defaultColDef]="defaultColDef"
+      >
+    </ag-grid-angular>
+  </div>
+</fieldset>
+<fieldset>
+  <legend>New Transaction</legend>
+  <div class="wrap-box" *ngIf="!isTransactionSubmitted">
+    <div class="form-line">
+        <input class="input-box" type="text" id="bitcoinAmount" placeholder="$0" #currencyAmount/>
+        <input class="input-box" id="currencyAmount" placeholder="₿" #bitcoinAmount/>   
+    </div>
+    <div class="form-line small-text">You can buy up to $35000.00</div>
+    <div class="form-line">
+      <select name="purchaseFrequency" #purchaseFrequency>
+        <option class="option-box" value="onetime">One Time Purchase</option>          
+        <option class="option-box" value="daily">Daily</option>
+        <option class="option-box" value="weekly">Weekly</option>
+        <option class="option-box" value="twiceamoth">Twice a Month</option>
+        <option class="option-box" value="monthly">Monthly</option>     
+      </select>
+    </div>
+    <div class="form-line">
+      <div class="select-box">
+        <select name="transactionType" #transactionType>
+          <option class="option-box" value="buy">Buy</option>          
+          <option value="sell">Sell</option>
+        </select>
+        <div class="inline-box">
+          <img src="/assets/imgs/bitcoinlogo.jpg" alt="Bitcoin Logo" height="30px" width="30px">
+        </div>
+    </div>
+  </div>
+    <div class="form-line">
+      <div class="select-box">
+        <div class="inline-box"> Pay With </div>
+        <div class="inline-box-margin">
+            <img src="/assets/imgs/morganstanleylogo.jpg" alt="Morgan Stanley Logo" height="30px" width="30px">
+        </div>
+    </div>
+    
+    
+  </div>
+    <div class="form-line">
+        <button type="button" (click)="confirmTransaction(purchaseFrequency.value, transactionType.value, currencyAmount.value, bitcoinAmount.value);
+          currencyAmount.value=''; bitcoinAmount.value=''">
+            Confirm
+        </button>
+    
+  </div>
+
+  <div *ngIf="isTransactionSubmissionSuccess">
+    <div class="form-line">Thank you. You transaction is being processed.</div>  
+  </div>
+  </div>
+
+  <div *ngIf="isTransactionSubmissionError">
+    <div class="form-line">Thank you. There waa an error while processing transaction.</div>  
+  </div>
+</fieldset>

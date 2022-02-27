@@ -1,10 +1,12 @@
 @import "vars";
 
-
 :host {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+	margin-left: 20em !important;
+	margin-bottom: 100px;
+	overflow: visible;
 }
 
 main {
@@ -12,17 +14,120 @@ main {
 	flex: 1;
 	flex-flow: column;
 	min-height: 100%;
+	overflow: visible;
 	margin-top: 5em;
+	margin-left: 20em !important;	
 }
 
-// sidenav-menu {
-// 	width: $layout-navbar-width-size;
-// 	min-width: $layout-navbar-width-size;
-// }
+title-box {
+	text-align: left;
+}
+
+.form-box {
+	margin-top: 10em !important;	
+}
+
+input {
+	padding: 5px;
+	margin: 0.5em 1em ;
+	display: inline-block;
+	border: 1px solid #ccc;
+	text-align: center;
+	border-radius: 3px;
+}
+
+.form-line {
+	display: flex;	
+	justify-content: center;
+	align-items: center;
+	font-size: 90%;
+	font-weight: 300;
+	
+}
+.input-box {
+	width: 3em;
+}
+
+.wrap-box {	
+	padding-top: 0em;
+	padding-bottom: 0em;	
+}
+
+.small-text {
+	font-size: 85%;
+}
+
+.inline-box {
+	display: inline-block;
+	padding: 0px;
+	margin:0.5em 1em;
+	text-align: center;
+}
+
+.inline-box-margin {
+	display: inline-block;
+	padding: 0px;
+	margin:0.5em 1em;
+	margin-left: 30px;
+	text-align: center;
+}
+
+option {
+	padding: 8px !important;
+	text-align: center;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}         
+
+button {
+	display: inline-block;
+	
+	padding: 8px 20px;
+	margin:0.5em 1em ;
+	text-align: center;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	background-color: rgb(255, 255, 255);
+}
+button:hover {
+	background-color: #343a40;
+	transition: 0.1s;
+	color: white;
+}
+select {
+	display: inline-block;
+	padding: 8px 12px;
+	margin:0.5em 1em;
+	text-align: center;
+	border: 1px solid #ccc;
+	border-radius: 3px;	
+}
+
+fieldset {
+	display: block;
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-top: 0.35em;
+	padding-bottom: 1em;
+	padding-left: 0.75em;
+	padding-right: 0.75em;
+	border: 2px groove (internal value);
+	border: 1px solid #ccc;
+}
+
+legend {
+	background-color: white;
+	color: gray;
+	padding: 5px 10px;
+	font-size: 0.8rem;
+	width: auto !important;
+}
+
 footer {
 	width: 100%;
 	min-height: 64px;
-	
+	max-height: 100px;	
+	position: absolute;
 
 	.fa-heart {
 		
