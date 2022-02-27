@@ -1,3 +1,72 @@
-<div>
-	Borrow component
-</div>
+<body>
+	<div class="guide">
+		
+		<h2> &nbsp;Borrow </h2>
+		<hr class="underline">
+		<p>You can now borrow against the crypto assets you hold with Morgan Stanley. Any assets you choose to use as collateral will be locked away and will not earn rewards while in this state </p>
+		<b><p>&nbsp; *For full terms and conditions please see this <a [routerLink]="'donothing'">link</a></p></b>
+		<h3><b>Get A Loan in 4 Steps:</b></h3>
+		
+		<ol>
+			<li>Choose Dollars or StableCoin
+				<ul>Enter the amount you want to spend</ul>
+			</li>
+			<li>Pick your collateral and interest rate
+				<ul>Choose from your current balance or transfer in new coins</ul>
+			</li>
+
+			<li>Select the length of your loan
+				<ul>You can extend or close your loan at anytime</ul>
+			</li>
+			<li>Confirm details and get approved
+				<ul>Receive Your money and spend it</ul>
+			</li>
+		  </ol>
+		  <hr class="underline">
+
+		  <h4>Choose your loan terms : </h4>
+
+		  <form>
+			<div class="elementName"> Total Loan Amount</div>
+			<div class="form-row">
+			  <div class="col">
+				<input type="text" class="form-control" placeholder="Loan Amount">
+			  </div>
+			  <div class="col">
+				<select  name="usd" id="usd">
+					<option value="usd">USD</option>
+				</select>
+			  </div>
+			</div>
+			<div class="form-row">
+				<div class="col">
+				  <input type="text" class="form-control" placeholder="Coin units">
+				</div>
+				<div class="col">
+					<select  name="coin" id="coin">
+    					<option value="btc">BTC</option>
+    					<option value="eth">ETH</option>
+					</select>
+				</div>
+			  </div>
+			  <div class="form-row">
+				<div class="col">
+				  Duration of Loan
+				</div>
+				<div class="col">
+					<select  name="year" id="year">
+    					<option value=1>1 Year(s)</option>
+    					<option value=2>2 Year(s)</option>
+						<option value=2>3 Years(s)</option>
+						<option value=2>4 Years(s)</option>
+					</select>
+				</div>
+
+			  </div>
+
+		  </form>
+
+	</div>
+
+
+</body>

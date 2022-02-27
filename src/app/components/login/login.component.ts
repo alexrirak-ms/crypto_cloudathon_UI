@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import {CurrencyPipe} from "@angular/common";
 import {LoginApiService} from "../../services/index"
 import { Router } from '@angular/router';
-import { NgModel } from "@angular/forms";
+import { NgForm} from "@angular/forms";
 @Component({
 	selector: "login",
 	templateUrl: "./login.component.html",
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
 	}
 
-	onLoginSubmit(inputs: NgModel){
+	onLoginSubmit(inputs: NgForm){
 	
 		const user = {
 		  username :inputs.value.username,
