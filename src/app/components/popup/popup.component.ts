@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import * as $  from "jquery";
+//declare var $ : any;
+
 @Component({
 	selector: "popup",
 	templateUrl: "./popup.component.html",
@@ -18,11 +20,11 @@ export class PopupComponent implements OnInit {
 		this.message = displayMessage;
 		this.headerMessage = (header || "Error")
 		// @ts-ignore
-		$("#popup-modal").modal("show")
+		$("#popup-modal")//.modal("show") //it's a long story
 	}
 	close(){
 		// @ts-ignore
-		$("#popup-modal").modal("hide")
+		$("#popup-modal")//.modal("hide")
 	}
 
 }

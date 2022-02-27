@@ -1,10 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { AuthApiService } from '..';
 @Injectable()
 export class PortfolioApiService {
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient, private authApiService: AuthApiService){
 
+    }
+    getUserToken(){
+      return this.authApiService.getUserToken();
     }
     
     getPortfolioInitData(param1: any){
