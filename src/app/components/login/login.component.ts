@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import {CurrencyPipe} from "@angular/common";
 import {LoginApiService} from "../../services/index"
-import {PopupComponent} from "../popup/popup.component"
+import { Router } from '@angular/router';
+import { NgModel } from "@angular/forms";
 @Component({
 	selector: "login",
 	templateUrl: "./login.component.html",
@@ -9,25 +10,38 @@ import {PopupComponent} from "../popup/popup.component"
 	providers: [CurrencyPipe]
 })
 export class LoginComponent implements OnInit {
-	@ViewChild( PopupComponent) private messageModal: PopupComponent ;
+
+	//@ViewChild( PopupComponent) private messageModal: PopupComponent ;
 	componentString: string = "";
 	componentConfig: any = {};
 	data: any = {};
-	constructor(
-	private LoginApiService: LoginApiService
-	){}
+	username: String;
+	password: String;
+
+	constructor(private LoginApiService: LoginApiService,
+		private router: Router){}
 	ngOnInit(){
-		//Nothing for now
-		this.LoginApiService.getLoginInitData(null).subscribe(
-			data => {
-				console.log(data)
-				this.data = data;
-			},
-			error => {
-				this.messageModal.show("Error occured while pulling Login data")
-				console.log(error)
-			}
-		)
+
+	}
+
+	onLoginSubmit(inputs: NgModel){
+	
+		const user = {
+		  username :inputs.value.username,
+		  password :inputs.value.password
+		}
+		this.LoginApiService.authenticateUser(user).subscribe(data => {
+			console.log(data);
+			if (data.success) {
+				this.LoginApiService.storeUserData(data.user);
+				//pop up message
+				this.router.navigate(['portfolio']);
+	  
+			}else {
+			  //pop up message
+			  this.router.navigate(['login']);
+		  }
+		  });
 	}
 
 }
