@@ -69,7 +69,7 @@ export class SendReceiveComponent implements OnInit {
 		flex: 1
 	};
 
-	currencyFormatter(currency, sign) {
+	currencyFormatter(currency, sign: string) {
 	  var sansDec = currency.toFixed(0);
 	  var formatted = sansDec.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	  return sign + `${formatted}`;
