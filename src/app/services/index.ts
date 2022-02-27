@@ -3,3 +3,4 @@ export { SendReceiveApiService } from "./send-receive-service/send-receive.servi
 export { RewardsApiService } from "./rewards-service/rewards.service"
 export { PortfolioApiService } from "./portfolio-service/portfolio.service"
 export { BuySellApiService } from "./buy-sell-service/buy-sell.service"
+export { LoginApiService } from "./login-service/login.service"

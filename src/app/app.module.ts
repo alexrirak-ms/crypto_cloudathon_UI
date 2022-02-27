@@ -11,8 +11,8 @@ import { AppComponent } from "./app.component";
 import { AREAS_COMPONENTS } from "./areas/index";
 import { AppSharedModule } from "./shared";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { BuySellComponent, SendReceiveComponent, PopupComponent, PortfolioComponent,EarnRewardsComponent, BorrowComponent } from "./components/index"
-import { BuySellApiService, SendReceiveApiService, PortfolioApiService, RewardsApiService, BorrowApiService } from './services/index'
+import { BuySellComponent, SendReceiveComponent, PopupComponent, PortfolioComponent,EarnRewardsComponent, BorrowComponent, LoginComponent } from "./components/index"
+import { BuySellApiService, SendReceiveApiService, PortfolioApiService, RewardsApiService, BorrowApiService, LoginApiService } from './services/index'
 //import { HighchartsChartModule } from 'highcharts-angular';
 @NgModule({
 	declarations: [AppComponent,
@@ -22,6 +22,7 @@ import { BuySellApiService, SendReceiveApiService, PortfolioApiService, RewardsA
 		EarnRewardsComponent,
 		BorrowComponent,
 		PopupComponent,
+		LoginComponent,
 		...AREAS_COMPONENTS],
 	imports: [
 		// vendors
@@ -43,7 +44,8 @@ import { BuySellApiService, SendReceiveApiService, PortfolioApiService, RewardsA
 		BuySellApiService,
 		SendReceiveApiService,
 		RewardsApiService,
-		BorrowApiService
+		BorrowApiService,
+		LoginApiService
 	],
 	bootstrap: [AppComponent],
 })
