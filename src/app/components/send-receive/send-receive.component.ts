@@ -11,7 +11,7 @@ import {GridApi, GridReadyEvent} from "ag-grid-community";
 	providers: [CurrencyPipe]
 })
 export class SendReceiveComponent implements OnInit {
-	@ViewChild(PopupComponent) private messageModal: PopupComponent;
+	@ViewChild(PopupComponent) messageModal: PopupComponent;
 	data: any = [];
 	rowData:any;
 	currencyInBTC:boolean = false;
