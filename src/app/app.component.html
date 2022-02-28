@@ -1,31 +1,44 @@
 <div id="headerTitle">
-	<span class="title">Morgan Stanley Online</span>
+	<span class="title">Crypto Banksters Online</span>
 </div>
 <div>
 	<!-- side bar elements -->
-	<div style="width: 250px; background-color: #01325d; height: 100%; position: fixed; padding-top: 200px;">
+	<div style="width: 250px; background-color: #01325d; height: 100%; position: fixed; padding-top: 100px;">
 	<div class="sa-tab sa-tabs-left">
 		<ul class="nav-vertical-tabs nav-tabs">
-			<li class="clickable" (click)="tabSwitch('portfolio')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+			<li class="clickable nav-item main-tab" (click)="tabSwitch('portfolio')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+				<i class="glyphicon glyphicon-tasks nav-icon"></i>
 				<a [routerLink]="'portfolio'">Portfolio</a>
 			</li>
-			<li class="clickable" (click)="tabSwitch('earnRewards')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+			<li class="clickable main-tab  nav-item" (click)="tabSwitch('earnRewards')" [ngClass]="{'sa-active' : isSelectedTab('earnRewards')}">
+				<i class="glyphicon glyphicon-piggy-bank nav-icon"></i>
 				<a [routerLink]="'earnRewards'">Earn Rewards</a>
 			</li>
-			<li class="clickable" (click)="tabSwitch('buySell')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+			<li class="clickable main-tab nav-item" (click)="tabSwitch('buySell')" [ngClass]="{'sa-active' : isSelectedTab('buySell')}">
+				<i class="glyphicon glyphicon-usd nav-icon"></i>
 				<a [routerLink]="'buySell'">Buy & Sell</a>
 			</li>
-			<li class="clickable" (click)="tabSwitch('sendReceive')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+			<li class="clickable main-tab nav-item" (click)="tabSwitch('sendReceive')" [ngClass]="{'sa-active' : isSelectedTab('sendReceive')}">
+				<i class="glyphicon glyphicon-resize-horizontal nav-icon"></i>
 				<a [routerLink]="'sendReceive'">Send & Receive</a>
 			</li>
-			<li class="clickable" (click)="tabSwitch('borrow')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+			<li class="clickable main-tab nav-item" (click)="tabSwitch('borrow')" [ngClass]="{'sa-active' : isSelectedTab('borrow')}">
+				<i class="glyphicon glyphicon-briefcase nav-icon"></i>
 				<a [routerLink]="'borrow'">Borrow</a>
 			</li>
-
+			<li *ngIf="!loggedIn()" class="clickable main-tab nav-item" (click)="tabSwitch('login')" [ngClass]="{'sa-active' : isSelectedTab('login')}">
+				<i class="glyphicon glyphicon-log-in nav-icon"></i>
+				<a [routerLink]="'login'">Login</a>
+			</li>
+			<li *ngIf="loggedIn()" class="clickable main-tab nav-item" (click)="logoutUser()" [ngClass]="">
+				<i class="glyphicon glyphicon-log-out nav-icon"></i>
+				<a [routerLink]="'login'">Log Out</a>
+			</li>
 		</ul>
 	</div>
 </div>
 </div>
+
 <main role="main" class="container" style="margin-top:0px;">
 	<div [style.position]="'relative'">
 		<router-outlet></router-outlet>

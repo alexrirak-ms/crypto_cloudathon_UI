@@ -26,9 +26,9 @@ export class AuthApiService {
       if (!password) console.log("No PW provided")
       //When we do eventually utilize the PW, this should be a POST request instead
       let params = new HttpParams().set("create_user", "True") //hardcoded to True for now, always create a new user
-      return this.http.get("/user/by-username/" + username, {params: params})
+      return this.http.get("//crypto-banksters-wallet-api.azurewebsites.net/user/by-username/" + username, {params: params})
     }
-    
+
     async initUserAuth(_username: string, _password: string) : Promise<LoginStatus>{
       var p = new Promise<LoginStatus>((prom, rej) => {
         if (!rej){} //to make typescript shut up
@@ -57,7 +57,7 @@ export class AuthApiService {
             console.log(error)
             return prom(new LoginStatus(-1, "Backend error: " + error.statusText))
           }
-        })  
+        })
       })
       return p;
     }

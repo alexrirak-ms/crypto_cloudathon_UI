@@ -1,5 +1,6 @@
 @import "vars";
 
+
 :host {
 	display: flex;
 	flex-direction: column;
@@ -35,28 +36,4 @@ footer {
 			margin: 20px 0;
 		}
 	}
-}
-
-fieldset.bordered {
-    border: 1px groove #ddd;
-    padding: 0 1.4em 1.4em 1.4em;
-    margin: 0 0 1.5em 0;
-    -webkit-box-shadow:  0px 0px 0px 0px #000;
-            box-shadow:  0px 0px 0px 0px #000;
-}
-
-legend.title {
-    font-size: 1.2em;
-    font-weight: bold;
-    text-align: left;
-	width: inherit;
-    padding: 0 10px;
-}
-
-.form-lines {
-	padding: 5px;
-}
-
-select.form-control {
-    -webkit-appearance: menulist;
 }

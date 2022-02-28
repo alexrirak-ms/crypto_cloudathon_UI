@@ -9,9 +9,11 @@ import{
 	BuySellComponent,
 	BorrowComponent,
 	SendReceiveComponent,
+	LoginComponent,
+	AccountsComponent,
 	//PopupComponent,
 	EarnRewardsComponent,
-	LoginComponent, 	
+	 	
 } from './components/index'
 const routes : Routes = [
 	{
@@ -44,7 +46,12 @@ const routes : Routes = [
 		component: LoginComponent,
 		canActivate: [NoLoginGuard]
 	},
-	
+	{
+		path: 'accounts',
+		component: AccountsComponent,
+		canActivate: [UserLoggedInGuard]
+	},
+
 ]
 @NgModule({
 	imports: [RouterModule.forRoot(routes, {useHash: true})],

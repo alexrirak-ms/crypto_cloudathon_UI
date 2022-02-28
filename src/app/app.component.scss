@@ -50,12 +50,34 @@ footer {
 	vertical-align: middle;
 }
 .nav-tabs{
-	font-size: 12px;
-	line-height: 12px;
+	font-size: 20px;
+	line-height: 20px;
 	font-weight: 400;
-	border:1px solid white;
+	border-bottom: 0px !important;
 }
+.main-tab>a{
+	color: white;
+	width: 70%;
+	display: inline-block;
+}
+
 .sa-active{
-	font-weight: 800;
-	background-color: white;
+	font-weight: 700;	
 }
+.nav-icon{
+	font-size: 16px;
+	padding-right: 15px;
+	color: white;
+}
+.sa-active>a{
+	background-color: lightblue;
+	color: darkblue;
+	
+}
+.main-tab{
+	width: 100%;
+	height: 50px;
+}
+ul {
+	list-style-type: none;
+  }

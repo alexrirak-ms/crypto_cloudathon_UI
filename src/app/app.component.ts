@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
 	title = "CryptoBanksters";
 	selectedTab: string = "";
 	tabs: any[] = [];
+	
 	constructor(
 	private router: Router,
 	private location: Location,
@@ -26,12 +27,24 @@ export class AppComponent implements OnInit {
 	initUserLogin(userId: string, pw: string){
 		this.authService.initUserAuth(userId, pw)
 	}
+	loggedIn(){
+		return this.authService.loggedIn;
+	}
+	logoutUser(){
+		this.authService.userId = "";
+		this.authService.username = "";
+		this.authService.loggedIn = false;
+		return this.router.navigate(['login'])
+		//TODO - eventually we would want to clear cookies here too, etc
+
+	}
 	initTabs(){
 		this.tabs.push(new TabData('portfolio', 'Portfolio'))
 		this.tabs.push(new TabData('earnRewards', 'Earn Rewards'))
 		this.tabs.push(new TabData('buySell', 'Buy & Sell'))
 		this.tabs.push(new TabData('sendReceive', 'Send & Receive'))
 		this.tabs.push(new TabData('borrow', 'Borrow'))
+		this.tabs.push(new TabData('login', 'Login'))
 	}
 	
 	tabSwitch(tab: string){
@@ -41,7 +54,7 @@ export class AppComponent implements OnInit {
 		this.selectedTab = tab.label;
 	}
 	isSelectedTab(tab: string){
-		return this.selectedTab == tab;
+		return this.currentRoute() == tab;
 	}
 	//Should be used for local testing only
 	fakeAuthenticate(){
@@ -50,6 +63,7 @@ export class AppComponent implements OnInit {
 		this.authService.loggedIn = true;
 		
 	}
+
 	isUserAuthenticated(){
 		//Eventually, this method will check for a valid auth cookie
 		//If it exists, we try to authenticate with the server, set up authService, and return true based on that
@@ -62,9 +76,18 @@ export class AppComponent implements OnInit {
 		
 		return new Promise((prom, rej) => {if (!rej){}; return prom(false)})
 		
-
-
 	}
+
+	currentRoute(){
+		let path: string = this.location.path();
+		if (path.includes("/")){
+			let routeState = path.substring(1)
+			if (routeState.includes("?")) routeState = routeState.split("?")[0]
+			return routeState;
+		}
+		return "";
+	}
+
 	async routeOnInit(){
 		let authenticated = await this.isUserAuthenticated();
 		if (authenticated){
