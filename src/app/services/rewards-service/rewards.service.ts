@@ -1,6 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+// import {HttpClient, HttpHeaders} from '@angular/common/http';
+// import { map } from 'rxjs/operators';
+
+
 import { AuthApiService } from '..';
 @Injectable()
 export class RewardsApiService {
@@ -11,17 +14,12 @@ export class RewardsApiService {
       return this.authApiService.getUserToken();
     }
     
-    getRewardsInitData(param1: any){
-        //not actually required
-        // @ts-ignore
-        const httpOptions = {
-            headers: new HttpHeaders({
-              'Content-Type':  'application/json'
-            })
-          };
-        var postData = {
-            "param1": param1
-        }
-        return this.http.post("/CryptoBanksters/Rewards/InitData", postData).pipe(map(data => data))
+    getRewardsInitData(userID: string){
+      return this.http.get("//crypto-banksters-rewards-account.azurewebsites.net/InvestmentAccount/" + userID)
+    }
+    
+    executeTransaction(currencyAmount: any) {
+      console.log('PIZZA' + currencyAmount);
+      return this.http.get("//crypto-banksters-rewards-account.azurewebsites.net/InvestmentAccount/SupportedCoins")
     }
 }
