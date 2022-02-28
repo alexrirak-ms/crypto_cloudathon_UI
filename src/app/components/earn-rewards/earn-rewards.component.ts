@@ -19,7 +19,13 @@ export class EarnRewardsComponent implements OnInit {
 	isTransactionSubmitted: boolean;
 	isTransactionSubmissionSuccess: boolean;
 	isTransactionSubmissionError: boolean;
-	
+
+	defaultColDef = {
+		resizable: true,
+		sortable: true,
+		flex: 1
+	};
+
 	columnDefs = [
 		{headerName: 'Coin', field: 'Coin'},
 		{headerName: 'Number of Coins', field: 'NumberCoins'},
@@ -52,10 +58,10 @@ export class EarnRewardsComponent implements OnInit {
 		this.RewardsApiService.executeTransaction(currencyAmount, Currency, accountFromTo)
 		  .subscribe(
 			data => {
-				
+
 				// console.log("THIS IS A TEST " + currencyAmount + " " + Currency + " " + accountFromTo);
 				console.log(`Getting successful response with data: "${data}"`);
-				
+
 			},
 			error => {
 				console.log(error + currencyAmount)
@@ -79,8 +85,8 @@ export class EarnRewardsComponent implements OnInit {
 				this.messageModal.show("Error occurred while pulling asset data")
 				console.log(error);
 			}
-		);	
+		);
 	}
-	
+
 
 }
