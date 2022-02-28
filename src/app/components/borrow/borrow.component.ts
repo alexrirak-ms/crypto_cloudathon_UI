@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import {CurrencyPipe} from "@angular/common";
 import {BorrowApiService} from "../../services/index"
 import {PopupComponent} from "../popup/popup.component"
+//import { AgGridModule } from 'ag-grid-angular';
 @Component({
 	selector: "borrow",
 	templateUrl: "./borrow.component.html",
@@ -9,6 +10,15 @@ import {PopupComponent} from "../popup/popup.component"
 	providers: [CurrencyPipe]
 })
 export class BorrowComponent implements OnInit {
+
+	columnDefs = [{ field: 'term' }, { field: 'value' }];
+
+	rowData = [
+	  { term: 'Total Loan', value: '$' },
+	  { term: 'Interest Rate', value: '%' },
+	  { term: 'Monthly Interest', value: '$' },
+	  { term: 'Total Interest', value: '$' },
+	];
 	@ViewChild( PopupComponent) private messageModal: PopupComponent ;
 	componentString: string = "";
 	componentConfig: any = {};
