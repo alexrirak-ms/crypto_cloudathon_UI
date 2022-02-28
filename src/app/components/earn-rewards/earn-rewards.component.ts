@@ -14,6 +14,11 @@ export class EarnRewardsComponent implements OnInit {
 	componentConfig: any = {};
 	data: any = {};
 	rowData:any;
+
+
+	isTransactionSubmitted: boolean;
+	isTransactionSubmissionSuccess: boolean;
+	isTransactionSubmissionError: boolean;
 	
 	columnDefs = [
 		{headerName: 'Coin', field: 'Coin'},
@@ -25,7 +30,7 @@ export class EarnRewardsComponent implements OnInit {
 	){}
 	ngOnInit(){
 		//Nothing for now
-		this.RewardsApiService.getRewardsInitData('4aa9777c-f2e9-4812-9270-5f3b4c178d89').subscribe(
+		this.RewardsApiService.getRewardsInitData('e16666ff-c559-4aab-96eb-f0a5c2c77b18').subscribe(
 			data => {
 				console.log(data);
 				this.data = data;
@@ -43,26 +48,30 @@ export class EarnRewardsComponent implements OnInit {
 		);
 	}
 
-	confirmTransaction(currencyAmount: any): void {
-		this.RewardsApiService.executeTransaction(currencyAmount)
+	confirmTransaction(currencyAmount: any, Currency: any, accountFromTo: any): void {
+		this.RewardsApiService.executeTransaction(currencyAmount, Currency, accountFromTo)
 		  .subscribe(
 			data => {
 				
+				// console.log("THIS IS A TEST " + currencyAmount + " " + Currency + " " + accountFromTo);
 				console.log(`Getting successful response with data: "${data}"`);
-				console.log("CAKE");
+				
 			},
 			error => {
 				console.log(error + currencyAmount)
 			}
 		);
-		this.RewardsApiService.getRewardsInitData('4aa9777c-f2e9-4812-9270-5f3b4c178d89').subscribe(
+		this.RewardsApiService.getRewardsInitData('e16666ff-c559-4aab-96eb-f0a5c2c77b18').subscribe(
 			data => {
 				console.log(data);
 				this.data = data;
 
+				console.log("TEST");
 				this.data.forEach((value: any) => {
-					if (!this.rowData) {this.rowData = []}
+					this.rowData = []
 					this.rowData.push({Coin: value['Coin'], NumberCoins: value['NumberCoins'], ValueUSD: "$" + value['ValueUSD']})
+					console.log(value['NumberCoins']);
+					this.isTransactionSubmissionSuccess = true;
 
 				})
 			},
@@ -70,8 +79,8 @@ export class EarnRewardsComponent implements OnInit {
 				this.messageModal.show("Error occurred while pulling asset data")
 				console.log(error);
 			}
-		);
-		
+		);	
 	}
+	
 
 }

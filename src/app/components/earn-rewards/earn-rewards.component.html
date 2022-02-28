@@ -22,19 +22,19 @@
   <legend>Transfer Between Interest Account and Wallet</legend>
   <div class="wrap-box" *ngIf="!isTransactionSubmitted">
     <div class="form-line">
-        <input class="input-box" type="text" id="currencyAmount" placeholder="$0" #currencyAmount/>
+        <input class="input-box" type="text" id="currencyAmount" placeholder="0" #currencyAmount/>
         <!-- <input class="input-box" id="currencyAmount" placeholder="₿" #bitcoinAmount/>  -->
-        <select name="fromTo" #fromTo>
-          <option class="option-box" value="ToInterestAccount">From Wallet - To Interest Account</option>          
-          <option class="option-box" value="FromInterestAccount">To Interest Account - From Wallet</option> 
+        <select name="accountFromTo" #accountFromTo>
+          <option class="option-box" label="To Interest Account - From Wallet" value="To"></option>          
+          <option class="option-box" label="From Interest Account - To Wallet" value="From"></option> 
         </select>
         <select name="Currency" #Currency>
-          <option class="option-box" value="bitcoin">Bitcoin</option>          
-          <option class="option-box" value="ethereum">Ethereum</option> 
+          <option class="option-box" label="Bitcoin (Test Net)" value="BCY"></option>          
+          <!-- <option class="option-box" value="ethereum">Ethereum</option> -->
         </select>    
     </div>
     <div class="form-line">
-        <button type="button" (click)="confirmTransaction(currencyAmount.value);">
+        <button type="button" (click)="confirmTransaction(currencyAmount.value, Currency.value, accountFromTo.value);">
             Confirm
         </button>
   </div>

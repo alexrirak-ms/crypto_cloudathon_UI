@@ -18,7 +18,7 @@ export class AccountsComponent implements OnInit {
 	){}
 	ngOnInit(){
 		//Nothing for now
-		this.RewardsApiService.getRewardsInitData(null).subscribe(
+		this.RewardsApiService.getRewardsInitData("").subscribe(
 			data => {
 				console.log(data)
 				this.data = data;
