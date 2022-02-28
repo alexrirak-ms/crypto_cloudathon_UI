@@ -35,9 +35,11 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/styles/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/bootstrap.min.js"]
           },
           "configurations": {
             "production": {
@@ -104,14 +106,16 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/styles/bootstrap.min.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "src/assets/styles"
               ]
             },
-            "scripts": []
+            "scripts": [
+              "src/assets/js/bootstrap.min.js"]
           }
         },
         "lint": {

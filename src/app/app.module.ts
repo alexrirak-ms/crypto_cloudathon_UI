@@ -1,7 +1,7 @@
 import { BrowserModule, BrowserTransferStateModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { ServiceWorkerModule } from "@angular/service-worker";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { AgGridModule } from 'ag-grid-angular';
 
@@ -11,8 +11,9 @@ import { AppComponent } from "./app.component";
 import { AREAS_COMPONENTS } from "./areas/index";
 import { AppSharedModule } from "./shared";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { BuySellComponent, SendReceiveComponent, PopupComponent, PortfolioComponent,EarnRewardsComponent, BorrowComponent } from "./components/index"
-import { BuySellApiService, SendReceiveApiService, PortfolioApiService, RewardsApiService, BorrowApiService } from './services/index'
+
+import { BuySellComponent, SendReceiveComponent, PopupComponent, PortfolioComponent,EarnRewardsComponent, BorrowComponent, LoginComponent, AccountsComponent } from "./components/index"
+import { BuySellApiService, SendReceiveApiService, PortfolioApiService, RewardsApiService, BorrowApiService, AuthApiService } from './services/index'
 //import { HighchartsChartModule } from 'highcharts-angular';
 @NgModule({
 	declarations: [AppComponent,
@@ -22,6 +23,8 @@ import { BuySellApiService, SendReceiveApiService, PortfolioApiService, RewardsA
 		EarnRewardsComponent,
 		BorrowComponent,
 		PopupComponent,
+		LoginComponent,
+		AccountsComponent,
 		...AREAS_COMPONENTS],
 	imports: [
 		// vendors
@@ -31,6 +34,7 @@ import { BuySellApiService, SendReceiveApiService, PortfolioApiService, RewardsA
 		ServiceWorkerModule.register("/ngsw-worker.js", { enabled: environment.production }),
 		BrowserTransferStateModule,
 		AgGridModule,
+		ReactiveFormsModule,
 		//HighchartsChartModule,
 
 		// app
@@ -43,7 +47,8 @@ import { BuySellApiService, SendReceiveApiService, PortfolioApiService, RewardsA
 		BuySellApiService,
 		SendReceiveApiService,
 		RewardsApiService,
-		BorrowApiService
+		BorrowApiService,
+		AuthApiService
 	],
 	bootstrap: [AppComponent],
 })

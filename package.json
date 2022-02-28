@@ -35,7 +35,7 @@
     "@types/lodash": "^4.14.157",
     "ag-grid-angular": "^27.0.0",
     "ag-grid-community": "^27.0.1",
-    "bootstrap": "^4.5.0",
+    "bootstrap": "^5.1.3",
     "font-awesome": "^4.7.0",
     "highcharts": "^9.3.3",
     "highcharts-angular": "^3.0.0",

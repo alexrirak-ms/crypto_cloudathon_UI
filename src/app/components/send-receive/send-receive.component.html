@@ -4,7 +4,7 @@
 
 		<div class="d-flex align-items-center justify-content-between">
 			<h3>Your Assets:</h3>
-			<button type="button" class="btn btn-outline-primary">
+			<button type="button" class="btn btn-outline-primary" (click)="this.messageModal.showTransactionWarningModal()">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 					 class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
 					<path
@@ -34,20 +34,67 @@
 
 					</div>
 					<div class="col">
-						<input type="number" class="form-control form-control-lg" placeholder="Amount">
+						<input type="number" class="form-control form-control-lg" placeholder="$0.00" id="amountUSD" *ngIf="!this.currencyInBTC">
+						<input type="number" class="form-control form-control-lg" placeholder="₿0.00" id="amountBTC" *ngIf="this.currencyInBTC">
 					</div>
 					<div class="col">
-						<button type="button" class="btn btn-outline-primary btn-sm">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
-							  <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
+						<button type="button" class="btn btn-outline-primary btn-sm" *ngIf="!this.currencyInBTC" (click)="switchInputType()">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+								 class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+								<path fill-rule="evenodd"
+									  d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
 							</svg>
 							Switch to BTC
 						</button>
+						<button type="button" class="btn btn-outline-primary btn-sm" *ngIf="this.currencyInBTC" (click)="switchInputType()">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+								 class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+								<path fill-rule="evenodd"
+									  d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
+							</svg>
+							Switch to USD
+						</button>
+					</div>
+				</div>
+
+				<div style="margin: 1em 15em;padding: 15px;border: 1px solid;border-radius:5px;">
+
+					<div class="form-group row form-lines">
+						<label for="payWith" class="col-sm-3 col-form-label">Asset to Send:</label>
+						<div class="col-sm-9">
+							<select class="form-control" id="payWith">
+							  <option *ngFor="let coin of rowData">{{ coin.name }}</option>
+							</select>
+
+						</div>
+					</div>
+
+					<div class="form-group row form-lines">
+						<label for="toAddress" class="col-sm-3 col-form-label">To:</label>
+						<div class="col-sm-9">
+							<input type="email" class="form-control" id="toAddress"
+								   placeholder="Mobile, email or address">
+						</div>
+					</div>
+
+					<div class="form-group row form-lines">
+						<label for="note" class="col-sm-3 col-form-label">Note:</label>
+						<div class="col-sm-9">
+							<input type="email" class="form-control" id="note" placeholder="Optional Message">
+						</div>
+					</div>
+
+				</div>
+				<div class="form-group row justify-content-center">
+					<div class="col-1">
+						<button type="submit" class="btn btn-primary" (click)="this.messageModal.showInstantPaymentModalModal('send')">Continue</button>
 					</div>
 				</div>
 			</form>
 
 		</fieldset>
+
+		<popup></popup>
 
 	</div>
 </div>

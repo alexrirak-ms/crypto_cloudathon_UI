@@ -11,16 +11,15 @@ import {GridApi, GridReadyEvent} from "ag-grid-community";
 	providers: [CurrencyPipe]
 })
 export class SendReceiveComponent implements OnInit {
-	@ViewChild(PopupComponent) private messageModal: PopupComponent;
-	componentString: string = "";
-	componentConfig: any = {};
+	@ViewChild(PopupComponent) messageModal: PopupComponent;
 	data: any = [];
 	rowData:any;
+	currencyInBTC:boolean = false;
 	private gridApi!: GridApi;
 	columnDefs = [
 		{headerName: 'Name', field: 'name'},
 		{headerName: 'Balance', field: 'balance'},
-		{headerName: 'USD Balance', field: 'usd_balance'}
+		{headerName: 'USD Balance', field: 'usd_balance', valueFormatter: (params: any) => this.currencyFormatter(params.data.usd_balance, '$')}
 	];
 
 	constructor(private SendReceiveApiService: SendReceiveApiService) {
@@ -28,19 +27,26 @@ export class SendReceiveComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		//Nothing for now
-		//TODO: this user id should not be hardcoded
-		this.SendReceiveApiService.getSendReceiveInitData("e16666ff-c559-4aab-96eb-f0a5c2c77b18").subscribe(
+		this.SendReceiveApiService.getSendReceiveInitData(this.SendReceiveApiService.getUserToken()['user_id']).subscribe(
 			data => {
-				console.log(data);
 				this.data = data;
 
 				this.data.forEach((value: any) => {
 					if (!this.rowData) {this.rowData = []}
-					this.rowData.push({name: value['name'], balance: value['balances']['total_balance'] / 100000000, usd_balance: 0})
-				})
-				this.gridApi.setRowData(this.rowData);
 
+					this.SendReceiveApiService.getCoinValue(value['symbol']).subscribe(
+						usd_value => {
+							var balance: number = value['balances']['total_balance'] / 100000000
+
+							// push in the new row
+							var usd_balance: number = balance * <number> usd_value
+							this.rowData.push({name: value['name'], balance: balance + " " + value['symbol'].toUpperCase(), usd_balance: usd_balance})
+							//redraw rows so that the grid reloads
+							this.gridApi.setRowData(this.rowData);
+						}
+					)
+
+				})
 			},
 			error => {
 				this.messageModal.show("Error occurred while pulling asset data")
@@ -59,5 +65,15 @@ export class SendReceiveComponent implements OnInit {
 		sortable: true,
 		flex: 1
 	};
+
+	currencyFormatter(currency: number, sign: string) {
+	  var sansDec = currency.toFixed(0);
+	  var formatted = sansDec.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	  return sign + `${formatted}`;
+	}
+
+	switchInputType() {
+	  this.currencyInBTC = !this.currencyInBTC;
+	}
 
 }
