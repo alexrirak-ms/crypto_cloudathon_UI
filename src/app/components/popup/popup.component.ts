@@ -14,7 +14,9 @@ export class PopupComponent implements OnInit {
 	standardModal: any;
 	inputModal: any;
 	transactionWarningModal: any;
+	instantPaymentModal: any;
 	name: string;
+	paymentType: string;
 	constructor(){}
 
 	ngOnInit(){
@@ -32,6 +34,7 @@ export class PopupComponent implements OnInit {
 		this.inputModal = false;
 		this.standardModal = false;
 		this.transactionWarningModal = false;
+		this.instantPaymentModal = false;
 	}
 	showInputModal(name: string){
 		this.resetModalTypes()
@@ -42,7 +45,12 @@ export class PopupComponent implements OnInit {
 	showTransactionWarningModal(){
 		this.resetModalTypes()
 		this.transactionWarningModal = true;
-		this.name = "test";
+		$("#popup-modal").modal("show")
+	}
+	showInstantPaymentModalModal(paymentType: string){
+		this.resetModalTypes()
+		this.instantPaymentModal = true;
+		this.paymentType = paymentType;
 		$("#popup-modal").modal("show")
 	}
 
