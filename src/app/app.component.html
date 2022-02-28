@@ -1,27 +1,27 @@
 <div id="headerTitle">
-	<span class="title">Morgan Stanley Online</span>
+	<span class="title">Crypto Banksters Online</span>
 </div>
 <div>
 	<!-- side bar elements -->
-	<div style="width: 250px; background-color: #01325d; height: 100%; position: fixed; padding-top: 200px;">
+	<div style="width: 250px; background-color: #01325d; height: 100%; position: fixed; padding-top: 100px;">
 	<div class="sa-tab sa-tabs-left">
 		<ul class="nav-vertical-tabs nav-tabs">
-			<li class="clickable" (click)="tabSwitch('portfolio')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+			<li class="clickable nav-item main-tab" (click)="tabSwitch('portfolio')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
 				<a [routerLink]="'portfolio'">Portfolio</a>
 			</li>
-			<li class="clickable" (click)="tabSwitch('earnRewards')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+			<li class="clickable main-tab  nav-item" (click)="tabSwitch('earnRewards')" [ngClass]="{'sa-active' : isSelectedTab('earnRewards')}">
 				<a [routerLink]="'earnRewards'">Earn Rewards</a>
 			</li>
-			<li class="clickable" (click)="tabSwitch('buySell')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+			<li class="clickable main-tab nav-item" (click)="tabSwitch('buySell')" [ngClass]="{'sa-active' : isSelectedTab('buySell')}">
 				<a [routerLink]="'buySell'">Buy & Sell</a>
 			</li>
-			<li class="clickable" (click)="tabSwitch('sendReceive')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+			<li class="clickable main-tab nav-item" (click)="tabSwitch('sendReceive')" [ngClass]="{'sa-active' : isSelectedTab('sendReceive')}">
 				<a [routerLink]="'sendReceive'">Send & Receive</a>
 			</li>
-			<li class="clickable" (click)="tabSwitch('borrow')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+			<li class="clickable main-tab nav-item" (click)="tabSwitch('borrow')" [ngClass]="{'sa-active' : isSelectedTab('borrow')}">
 				<a [routerLink]="'borrow'">Borrow</a>
 			</li>
-			<li class="clickable" (click)="tabSwitch('login')" [ngClass]="{'sa-active' : isSelectedTab('portfolio')}">
+			<li class="clickable main-tab nav-item" (click)="tabSwitch('login')" [ngClass]="{'sa-active' : isSelectedTab('login')}">
 				<a [routerLink]="'login'">Login</a>
 			</li>
 
@@ -29,6 +29,7 @@
 	</div>
 </div>
 </div>
+
 <main role="main" class="container" style="margin-top:0px;">
 	<div [style.position]="'relative'">
 		<router-outlet></router-outlet>

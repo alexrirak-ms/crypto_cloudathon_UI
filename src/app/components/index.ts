@@ -5,4 +5,5 @@ export { BuySellComponent } from "./buy-sell/buy-sell.component"
 export { PortfolioComponent } from "./portfolio/portfolio.component"
 export { PopupComponent } from './popup/popup.component'
 export { LoginComponent } from './login/login.component'
+export { AccountsComponent } from './accounts/accounts.component'
 

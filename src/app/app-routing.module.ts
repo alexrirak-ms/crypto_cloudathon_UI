@@ -10,6 +10,7 @@ import{
 	BorrowComponent,
 	SendReceiveComponent,
 	LoginComponent,
+	AccountsComponent,
 	//PopupComponent,
 	EarnRewardsComponent,
 	 	
@@ -44,6 +45,11 @@ const routes : Routes = [
 		path: 'login',
 		component: LoginComponent,
 		canActivate: [NoLoginGuard]
+	},
+	{
+		path: 'accounts',
+		component: AccountsComponent,
+		canActivate: [UserLoggedInGuard]
 	},
 
 	

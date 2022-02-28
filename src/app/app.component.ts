@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
 		this.selectedTab = tab.label;
 	}
 	isSelectedTab(tab: string){
-		return this.selectedTab == tab;
+		return this.currentRoute() == tab;
 	}
 	//Should be used for local testing only
 	fakeAuthenticate(){
@@ -63,9 +63,18 @@ export class AppComponent implements OnInit {
 		
 		return new Promise((prom, rej) => {if (!rej){}; return prom(false)})
 		
-
-
 	}
+
+	currentRoute(){
+		let path: string = this.location.path();
+		if (path.includes("/")){
+			let routeState = path.substring(1)
+			if (routeState.includes("?")) routeState = routeState.split("?")[0]
+			return routeState;
+		}
+		return "";
+	}
+
 	async routeOnInit(){
 		let authenticated = await this.isUserAuthenticated();
 		if (authenticated){
