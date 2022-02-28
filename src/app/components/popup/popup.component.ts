@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
+
 //import * as $  from "jquery";
-//declare var $ : any;
+declare var $ : any;
 
 @Component({
 	selector: "popup",
@@ -10,20 +11,43 @@ import { Component, OnInit, Input } from "@angular/core";
 export class PopupComponent implements OnInit {
 	@Input() message: string = "";
 	@Input() headerMessage: string = "Error";
-
+	standardModal: any;
+	inputModal: any;
+	name: string;
 	constructor(){}
 
 	ngOnInit(){
 
 	}
-	show(displayMessage: string, header: string = "Error"){
+
+	showStandardModal(displayMessage: string,  header: string = "Error" ){
+		this.resetModalTypes()
 		this.message = displayMessage;
 		this.headerMessage = (header || "Error")
-		// @ts-ignore
-		$("#popup-modal").modal("show") //it's a long story
+		
+		$("#popup-modal").modal("show") 
+	}
+	resetModalTypes(){
+		this.inputModal = false;
+		this.standardModal = false;
+	}
+	showInputModal(name: string){
+		this.resetModalTypes()
+		this.inputModal = true;
+		this.name = name;
+		$("#popup-modal").modal("show") 
+	}
+
+	//default
+	show(displayMessage: string, header: string = "Error"){
+		this.resetModalTypes()
+		this.message = displayMessage;
+		this.headerMessage = (header || "Error")
+		
+		$("#popup-modal").modal("show")
 	}
 	close(){
-		// @ts-ignore
+		
 		$("#popup-modal").modal("hide")
 	}
 
