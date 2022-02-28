@@ -9,7 +9,6 @@ import{
 	BuySellComponent,
 	BorrowComponent,
 	SendReceiveComponent,
-	LoginComponent,
 	//PopupComponent,
 	EarnRewardsComponent,
 	LoginComponent, 	
@@ -45,11 +44,6 @@ const routes : Routes = [
 		component: LoginComponent,
 		canActivate: [NoLoginGuard]
 	},
-	{
-		path: 'login',
-		component: LoginComponent
-	},
-	
 ]
 @NgModule({
 	imports: [RouterModule.forRoot(routes, {useHash: true})],
