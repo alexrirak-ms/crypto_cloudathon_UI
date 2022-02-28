@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
 	title = "CryptoBanksters";
 	selectedTab: string = "";
 	tabs: any[] = [];
+	
 	constructor(
 	private router: Router,
 	private location: Location,
@@ -25,6 +26,17 @@ export class AppComponent implements OnInit {
 	}
 	initUserLogin(userId: string, pw: string){
 		this.authService.initUserAuth(userId, pw)
+	}
+	loggedIn(){
+		return this.authService.loggedIn;
+	}
+	logoutUser(){
+		this.authService.userId = "";
+		this.authService.username = "";
+		this.authService.loggedIn = false;
+		return this.router.navigate(['login'])
+		//TODO - eventually we would want to clear cookies here too, etc
+
 	}
 	initTabs(){
 		this.tabs.push(new TabData('portfolio', 'Portfolio'))
@@ -51,6 +63,7 @@ export class AppComponent implements OnInit {
 		this.authService.loggedIn = true;
 		
 	}
+
 	isUserAuthenticated(){
 		//Eventually, this method will check for a valid auth cookie
 		//If it exists, we try to authenticate with the server, set up authService, and return true based on that
