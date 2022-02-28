@@ -16,6 +16,6 @@ export class SendReceiveApiService {
 	}
 
 	getCoinValue(symbol: string) {
-		return this.http.get("//crypto-banksters-wallet-api.azurewebsites.net/usd-value/" + symbol)
+		return this.http.get("//crypto-banksters-wallet-api.azurewebsites.net/conversions/usd-value/" + symbol)
 	}
 }
