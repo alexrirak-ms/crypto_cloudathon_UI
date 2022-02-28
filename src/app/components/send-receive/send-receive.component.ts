@@ -30,7 +30,7 @@ export class SendReceiveComponent implements OnInit {
 	ngOnInit() {
 		//Nothing for now
 		//TODO: this user id should not be hardcoded
-		this.SendReceiveApiService.getSendReceiveInitData("e16666ff-c559-4aab-96eb-f0a5c2c77b18").subscribe(
+		this.SendReceiveApiService.getSendReceiveInitData(this.SendReceiveApiService.getUserToken()['user_id']).subscribe(
 			data => {
 				console.log(data);
 				this.data = data;
