@@ -4,6 +4,7 @@ import {  map  } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { BuySellTransaction } from '../../models/buyselltransaction';
 import { WalletTransaction } from '../../models/wallettransaction';
+import { AuthApiService } from '..';
 
 @Injectable()
 export class BuySellApiService {
@@ -15,9 +16,13 @@ export class BuySellApiService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient, private authApiService: AuthApiService){
+
+  }
+
+  getUserToken(){
+    return this.authApiService.getUserToken();
+  }
     
   getBuySellInitData(param1: any){
       // TODO need to check on watchlist API call

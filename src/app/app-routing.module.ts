@@ -12,7 +12,7 @@ import{
 	LoginComponent,
 	//PopupComponent,
 	EarnRewardsComponent,
-	LoginComponent, 	
+	 	
 } from './components/index'
 const routes : Routes = [
 	{
@@ -45,10 +45,7 @@ const routes : Routes = [
 		component: LoginComponent,
 		canActivate: [NoLoginGuard]
 	},
-	{
-		path: 'login',
-		component: LoginComponent
-	},
+
 	
 ]
 @NgModule({

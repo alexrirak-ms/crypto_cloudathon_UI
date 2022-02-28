@@ -1,26 +1,6 @@
 
-<!-- <div>
-	<h4>Placeholder login page</h4>
-	<h2>Login Page</h2><br>    
-    <div class="login">    
-    
-        <label><b>User Name     
-        </b>    
-        </label>    
-        <input type="text" name="Uname" id="Uname" placeholder="Username" [(ngModel)]="uname">    
-        <br><br>    
-        <label><b>Password     
-        </b>    
-        </label>    
-        <input type="Password" name="Pass" id="Pass" placeholder="Password" [(ngModel)]="pass">    
-        <br><br>   
-		<button [disabled]="loggingIn" (click)="login(uname, pass)">Log in</button> 
 
-</div>
- -->
-
-
-<div>
+ <div>
 	<h2>Login</h2>
 <form [formGroup]="loginContainer" (ngSubmit)="login()">
     <div class="form-group">
