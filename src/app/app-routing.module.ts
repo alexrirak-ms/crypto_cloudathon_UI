@@ -52,7 +52,6 @@ const routes : Routes = [
 		canActivate: [UserLoggedInGuard]
 	},
 
-	
 ]
 @NgModule({
 	imports: [RouterModule.forRoot(routes, {useHash: true})],
