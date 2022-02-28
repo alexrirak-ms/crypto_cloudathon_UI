@@ -1,70 +1,81 @@
 <h2 class="pb-2 border-bottom">Buy / Sell</h2>
-<fieldset>
-  <legend>Your watchlist</legend>
+<div class="field-box">
+  <div class="field-title">Your watchlist</div>
   <div>
-  <ag-grid-angular
-        style="width: 100%;"
-        class="ag-theme-balham"
-        domLayout='autoHeight'
-        [rowData]="rowData"
-        [columnDefs]="columnDefs"
-        [defaultColDef]="defaultColDef"
-      >
+    <ag-grid-angular
+    style="width: 100%;"
+    class="ag-theme-balham"
+    domLayout='autoHeight'
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef">
     </ag-grid-angular>
   </div>
-</fieldset>
-<fieldset>
-  <legend>New Transaction</legend>
-  <div class="wrap-box" *ngIf="!isTransactionSubmitted">
-    <div class="form-line">
-        <input class="input-box" type="text" id="bitcoinAmount" placeholder="$0" #currencyAmount/>
-        <input class="input-box" id="currencyAmount" placeholder="₿" #bitcoinAmount/>   
-    </div>
-    <div class="form-line small-text">You can buy up to $35000.00</div>
-    <div class="form-line">
-      <select name="purchaseFrequency" #purchaseFrequency>
-        <option class="option-box" value="onetime">One Time Purchase</option>          
-        <option class="option-box" value="daily">Daily</option>
-        <option class="option-box" value="weekly">Weekly</option>
-        <option class="option-box" value="twiceamoth">Twice a Month</option>
-        <option class="option-box" value="monthly">Monthly</option>     
-      </select>
-    </div>
-    <div class="form-line">
-      <div class="select-box">
-        <select name="transactionType" #transactionType>
-          <option class="option-box" value="buy">Buy</option>          
-          <option value="sell">Sell</option>
-        </select>
-        <div class="inline-box">
-          <img src="/assets/imgs/bitcoinlogo.jpg" alt="Bitcoin Logo" height="30px" width="30px">
+</div>
+<div class="field-box">
+  <div class="field-title" *ngIf="!isTransactionSubmitted">New Transaction</div>
+  <div class="field-title" *ngIf="isTransactionSubmitted">Processing Transaction</div>
+  <div class="form-line"></div>
+  <div *ngIf="!isTransactionSubmitted">
+    <div class="wrap-box">
+      <div class="form-line">
+        <div class="one-line">
+          <label placeholder="Amount">Amount</label>
         </div>
-    </div>
-  </div>
-    <div class="form-line">
-      <div class="select-box">
-        <div class="inline-box"> Pay With </div>
-        <div class="inline-box-margin">
-            <img src="/assets/imgs/morganstanleylogo.jpg" alt="Morgan Stanley Logo" height="30px" width="30px">
-        </div>
-    </div>
-    
-    
-  </div>
-    <div class="form-line">
-        <button type="button" (click)="confirmTransaction(purchaseFrequency.value, transactionType.value, currencyAmount.value, bitcoinAmount.value);
-          currencyAmount.value=''; bitcoinAmount.value=''">
-            Confirm
+        <input *ngIf="!isCurrencyBitcoin" (input)="amount=$event.target.value" type="text" class="input-box" id="amount" placeholder="$0"/>
+        <input *ngIf="isCurrencyBitcoin" (input)="amount=$event.target.value" type="text" class="input-box"  id="amount" placeholder="₿"/>   
+        <button type="button" class="blue" (click)="switchCurrency();">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
+          </svg>
         </button>
-    
+        <div class="one-line" *ngIf="!isCurrencyBitcoin">Switch to BTC</div>         
+        <div class="one-line" *ngIf="isCurrencyBitcoin">Switch to Dollar</div>
+      
+      </div>
+      <div class="form-line small-text">You can buy up to $35000.00</div>
+      <div class="form-line">
+        <select name="purchaseFrequency" #purchaseFrequency>
+          <option class="option-box" value="onetime">One Time Purchase</option>          
+          <option class="option-box" value="daily">Daily</option>
+          <option class="option-box" value="weekly">Weekly</option>
+          <option class="option-box" value="twiceamoth">Twice a Month</option>
+          <option class="option-box" value="monthly">Monthly</option>     
+        </select>
+      </div>
+      <div class="form-line">
+        <div class="select-box">
+          <select name="transactionType" #transactionType>
+            <option class="option-box" value="buy">Buy</option>          
+            <option value="sell">Sell</option>
+          </select>
+          <div class="inline-box">
+            <img src="/assets/imgs/bitcoinlogo.jpg" alt="Bitcoin Logo" height="30px" width="30px">
+          </div>
+        </div>
+      </div>
+      <div class="form-line">
+        <div class="select-box">
+          <div class="inline-box"> Pay With </div>
+          <div class="inline-box-margin">
+              <img src="/assets/imgs/morganstanleylogo.jpg" alt="Morgan Stanley Logo" height="30px" width="30px">
+          </div>
+        </div>
+      </div>
+      <div class="form-line">
+        <button type="button" (click)="confirmTransaction(purchaseFrequency.value, transactionType.value);">
+          Confirm
+        </button>
+      </div>
+    </div>
   </div>
 
-  <div *ngIf="isTransactionSubmissionSuccess">
-    <div class="form-line">Thank you. You transaction is being processed.</div>  
-  </div>
-  </div>
-
-  <div *ngIf="isTransactionSubmissionError">
-    <div class="form-line">Thank you. There waa an error while processing transaction.</div>  
-  </div>
-</fieldset>
+  <div *ngIf="isTransactionSubmitted">
+    <div *ngIf="isTransactionSubmissionSuccess">
+      <div class="form-line">Thank you. You transaction is being processed.</div>  
+    </div>
+    <div *ngIf="isTransactionSubmissionError">
+      <div class="form-line">Thank you. There was an error while processing transaction.</div>  
+    </div>
+  </div>  
+</div>
