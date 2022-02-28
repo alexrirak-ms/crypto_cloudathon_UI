@@ -16,6 +16,9 @@ export class BuySellComponent implements OnInit {
 	isTransactionSubmitted: boolean;
 	isTransactionSubmissionSuccess: boolean;
 	isTransactionSubmissionError: boolean;
+	isCurrencyBitcoin: boolean;
+	amount: string;
+	bitcoinUSDPrice:any;
 
 	@ViewChild( PopupComponent) private messageModal: PopupComponent;
 	componentString: string = "";
@@ -27,18 +30,18 @@ export class BuySellComponent implements OnInit {
 	){}
 
 	ngOnInit(){
-		this.isTransactionSubmitted = false;
-		// will be getting watch list if API is available
-		// this.buySellApiService.getBuySellInitData(null).subscribe(
-		// 	data => {
-		// 		console.log(data)
-		// 		this.data = data;
-		// 	},
-		// 	error => {
-		// 		this.messageModal.show("Error occured while pulling Borrow data")
-		// 		console.log(error)
-		// 	}
-		// )
+		this.isTransactionSubmitted = false;		
+		this.buySellApiService.getBitcoinUSDValue().subscribe(
+			data => {
+				console.log(`Getting successful conversion API response: ${data}`);
+				this.bitcoinUSDPrice = Math.round(data.usdPrice);
+				console.log(`Current bitcoin USD value: ${this.bitcoinUSDPrice}`);
+			},
+			error => {
+				this.messageModal.show("Error occured while calling conversion API")
+				console.log(error)
+			}
+		)
 	}
 
 	columnDefs = [
@@ -46,7 +49,6 @@ export class BuySellComponent implements OnInit {
 		{headerName: 'Price', field: 'price'},
 		{headerName: 'Change', field: 'change'}
 	];
-
 	rowData = [
 		{name: 'Chainlink (LINK)', price: '$170', change: '+ 4.93 %'},
 		{name: 'NuCypher (NU)', price: '$0.55', change: '+ 3.19 %'}
@@ -58,18 +60,25 @@ export class BuySellComponent implements OnInit {
 		flex: 1
 	};
  	
-	confirmTransaction(purchaseFrequency:string, transactionType:string, currencyAmount:string, bitcoinAmount:string): void {
-		this.buySellApiService.executeTransaction({ purchaseFrequency, transactionType, currencyAmount, bitcoinAmount } as BuySellTransaction)
+	switchCurrency() {
+		console.log(`this.isCurrencyBitcoin: ${this.isCurrencyBitcoin}"`);
+		this.isCurrencyBitcoin = !this.isCurrencyBitcoin;
+	}
+
+	confirmTransaction(purchaseFrequency:string, transactionType:string): void {
+		var amount = this.amount;
+		this.buySellApiService.executeTransaction({ purchaseFrequency, transactionType, amount } as BuySellTransaction, 
+			this.isCurrencyBitcoin, this.bitcoinUSDPrice)
 		  .subscribe(
 			data => {
-				console.log(`Getting successful response with data: "${data}"`);
+				console.log(`Getting successful transaction API response: ${data}`);
 				this.data = data;
 				this.isTransactionSubmitted = true;
 				this.isTransactionSubmissionSuccess = true;
 				this.isTransactionSubmissionError = false;
 			},
 			error => {
-				console.log(`Getting error response: "${error}"`);
+				console.log(`Getting error response from transaction API: "${error}"`);
 				this.isTransactionSubmitted = true;
 				this.isTransactionSubmissionSuccess = false;
 				this.isTransactionSubmissionError = true;
