@@ -12,10 +12,9 @@ import {GridApi, GridReadyEvent} from "ag-grid-community";
 })
 export class SendReceiveComponent implements OnInit {
 	@ViewChild(PopupComponent) private messageModal: PopupComponent;
-	componentString: string = "";
-	componentConfig: any = {};
 	data: any = [];
 	rowData:any;
+	currencyInBTC:boolean = false;
 	private gridApi!: GridApi;
 	columnDefs = [
 		{headerName: 'Name', field: 'name'},
@@ -28,11 +27,8 @@ export class SendReceiveComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		//Nothing for now
-		//TODO: this user id should not be hardcoded
 		this.SendReceiveApiService.getSendReceiveInitData(this.SendReceiveApiService.getUserToken()['user_id']).subscribe(
 			data => {
-				console.log(data);
 				this.data = data;
 
 				this.data.forEach((value: any) => {
@@ -74,6 +70,10 @@ export class SendReceiveComponent implements OnInit {
 	  var sansDec = currency.toFixed(0);
 	  var formatted = sansDec.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	  return sign + `${formatted}`;
+	}
+
+	switchInputType() {
+	  this.currencyInBTC = !this.currencyInBTC;
 	}
 
 }
