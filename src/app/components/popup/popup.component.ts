@@ -13,6 +13,7 @@ export class PopupComponent implements OnInit {
 	@Input() headerMessage: string = "Error";
 	standardModal: any;
 	inputModal: any;
+	transactionWarningModal: any;
 	name: string;
 	constructor(){}
 
@@ -24,18 +25,25 @@ export class PopupComponent implements OnInit {
 		this.resetModalTypes()
 		this.message = displayMessage;
 		this.headerMessage = (header || "Error")
-		
-		$("#popup-modal").modal("show") 
+
+		$("#popup-modal").modal("show")
 	}
 	resetModalTypes(){
 		this.inputModal = false;
 		this.standardModal = false;
+		this.transactionWarningModal = false;
 	}
 	showInputModal(name: string){
 		this.resetModalTypes()
 		this.inputModal = true;
 		this.name = name;
-		$("#popup-modal").modal("show") 
+		$("#popup-modal").modal("show")
+	}
+	showTransactionWarningModal(){
+		this.resetModalTypes()
+		this.transactionWarningModal = true;
+		this.name = "test";
+		$("#popup-modal").modal("show")
 	}
 
 	//default
@@ -43,11 +51,11 @@ export class PopupComponent implements OnInit {
 		this.resetModalTypes()
 		this.message = displayMessage;
 		this.headerMessage = (header || "Error")
-		
+
 		$("#popup-modal").modal("show")
 	}
 	close(){
-		
+
 		$("#popup-modal").modal("hide")
 	}
 
