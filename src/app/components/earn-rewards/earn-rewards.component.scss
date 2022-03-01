@@ -1,23 +1,23 @@
 @import "vars";
 
-:host {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-	margin-left: 20em !important;
-	margin-bottom: 100px;
-	overflow: visible;
-}
+// :host {
+// 	display: flex;
+// 	flex-direction: column;
+// 	min-height: 100vh;
+// 	margin-left: 20em !important;
+// 	margin-bottom: 100px;
+// 	overflow: visible;
+// }
 
-main {
-	display: flex;
-	flex: 1;
-	flex-flow: column;
-	min-height: 100%;
-	overflow: visible;
-	margin-top: 5em;
-	margin-left: 20em !important;	
-}
+// main {
+// 	display: flex;
+// 	flex: 1;
+// 	flex-flow: column;
+// 	min-height: 100%;
+// 	overflow: visible;
+// 	margin-top: 5em;
+// 	margin-left: 20em !important;	
+// }
 
 title-box {
 	text-align: left;

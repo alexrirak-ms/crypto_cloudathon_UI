@@ -1,8 +1,8 @@
 
 
- <div>
-	<h2>Login</h2>
-<form [formGroup]="loginContainer" (ngSubmit)="login()">
+ <div class="login-container">
+	<h2 style="font-weight: 500">Login</h2>
+<form [formGroup]="loginContainer" (ngSubmit)="login()" >
     <div class="form-group">
         <label for="username">Username</label>
         <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && loginContainer.controls.username.errors }" />

@@ -10,6 +10,7 @@ export class AuthApiService {
   username: any;
   authToken: any;
   env: any;
+  email: any;
   initPromise: any;
   loggedIn: any;
   redirectUrl: any;
@@ -35,11 +36,13 @@ export class AuthApiService {
         this.username = _username //don't store the password because that would be dumb
         this.initPromise = forkJoin([this.fetchUserId(this.username, _password)]).subscribe(resultArray => {
 
-          let userIdResponse = resultArray[0]; //The response for fetchUserId
-
+          let userIdResponse:any = resultArray[0]; //The response for fetchUserId
+          console.log(resultArray)
           //TODO - should be some handler for error/null userIdResponse
           if (userIdResponse){
-            this.userId = resultArray[0]
+            this.userId = userIdResponse.user_id;
+            this.username = userIdResponse.username;
+            this.email = userIdResponse.email;
             this.loggedIn = true;
             return prom(new LoginStatus(1, "Logged in successfully"))
           }

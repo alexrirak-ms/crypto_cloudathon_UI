@@ -67,6 +67,7 @@ export class BuySellComponent implements OnInit {
 
 	confirmTransaction(purchaseFrequency:string, transactionType:string): void {
 		var amount = this.amount;
+		//@ts-ignore
 		this.buySellApiService.executeTransaction({ purchaseFrequency, transactionType, amount } as BuySellTransaction, 
 			this.isCurrencyBitcoin, this.bitcoinUSDPrice)
 		  .subscribe(

@@ -3,7 +3,7 @@
 		<div style="display: block">
 			<div id="chart-title">
 				<h4>Portfolio Balance</h4>
-				<h3>$1,000,000.00</h3>
+				<h3>{{totalPortfolioValue | currency}}</h3>
 			</div>
 			<canvas baseChart width="1000" height="400"
     [datasets]="lineChartData"

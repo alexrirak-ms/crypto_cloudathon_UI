@@ -1,20 +1,6 @@
 
 @import "vars";
 
-:host {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-}
-
-main {
-	display: flex;
-	flex: 1;
-	flex-flow: column;
-	min-height: 100%;
-	margin-top: 5em;
-}
-
 
 button[disabled]{
 	opacity: 0.5;
@@ -61,4 +47,9 @@ button[disabled]{
   div.content {
 	display: table-cell;
 	// vertical-align: middle;
+  }
+  .login-container{
+	  width: 300px;
+	  margin: auto;
+	  margin-top: 10px;
   }
