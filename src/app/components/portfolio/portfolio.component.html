@@ -1,4 +1,79 @@
-<div>
-	Portfolio component
+<div id="portfolio-container">
+	<div id="portfolio-chart-container">
+		<div style="display: block">
+			<div id="chart-title">
+				<h4>Portfolio Balance</h4>
+				<h3>$1,000,000.00</h3>
+			</div>
+			<canvas baseChart width="1000" height="400"
+    [datasets]="lineChartData"
+    [labels]="lineChartLabels"
+    [options]="lineChartOptions"
+    [colors]="lineChartColors"
+    [legend]="lineChartLegend"
+    [chartType]="lineChartType"
+    [plugins]="lineChartPlugins">
+  </canvas>
+		  </div>
+	</div>
+	<div id="assets-div">
+		<div id="assets-top-bar">
+			<span id="assets-title"><h3>Your Assets</h3></span>
+			<span id="assets-filters">
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					<button class="btn btn-secondary" onclick="this.blur()" (click)="changeAssetButton('All')" 
+					[ngClass]="{'active' : selectedAssets==='All'}">
+					  All
+					</button>
+					<button class="btn btn-secondary" onclick="this.blur()" (click)="changeAssetButton('Rewards')" 
+					[ngClass]="{'active' : selectedAssets==='Rewards'}"> Reward Accounts
+					</button>
+					<button class="btn btn-secondary" onclick="this.blur()" (click)="changeAssetButton('Wallets')" 
+					[ngClass]="{'active' : selectedAssets==='Wallets'}">Wallets
+					</button>
+				  </div>
+			</span>
+			<div id="assets-table-container">
+				<ag-grid-angular *ngIf="selectedAssets==='All' && rewardsGridInitialized && walletsGridInitialized"
+				
+				style="width: 100%;"
+				class="ag-theme-balham"
+				domLayout='autoHeight'
+				[rowData]="allGridData"
+				[columnDefs]="columnDefs"
+				[defaultColDef]="defaultColDef"
+				(gridReady)="onAllGridReady($event)"
+				
+			  >
+			</ag-grid-angular>
+			<ag-grid-angular *ngIf="selectedAssets==='Rewards' && rewardsGridInitialized"
+				
+			style="width: 100%;"
+			class="ag-theme-balham"
+			domLayout='autoHeight'
+			[rowData]="rewardsGridData"
+			[columnDefs]="columnDefs"
+			[defaultColDef]="defaultColDef"
+			(gridReady)="onRewardsGridReady($event)"
+			
+			>
+			</ag-grid-angular>
+			<ag-grid-angular *ngIf="selectedAssets==='Wallets' && walletsGridInitialized"
+					
+			style="width: 100%;"
+			class="ag-theme-balham"
+			domLayout='autoHeight'
+			[rowData]="walletsGridData"
+			[columnDefs]="columnDefs"
+			[defaultColDef]="defaultColDef"
+			(gridReady)="onWalletsGridReady($event)"
+			
+		>
+		</ag-grid-angular>
+			</div>
+		</div>
+
+	</div>
+
 </div>
 <popup></popup>

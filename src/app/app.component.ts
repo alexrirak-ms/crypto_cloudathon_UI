@@ -58,8 +58,8 @@ export class AppComponent implements OnInit {
 	}
 	//Should be used for local testing only
 	fakeAuthenticate(){
-		this.authService.userId = "abcde-123456-abcde-123456";
-		this.authService.username = "alex";
+		this.authService.userId = "e16666ff-c559-4aab-96eb-f0a5c2c77b18";
+		this.authService.username = "Alex";
 		this.authService.loggedIn = true;
 		
 	}

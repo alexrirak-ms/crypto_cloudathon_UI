@@ -11,6 +11,7 @@ import { AppComponent } from "./app.component";
 import { AREAS_COMPONENTS } from "./areas/index";
 import { AppSharedModule } from "./shared";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ChartsModule } from 'ng2-charts';
 
 import { BuySellComponent, SendReceiveComponent, PopupComponent, PortfolioComponent,EarnRewardsComponent, BorrowComponent, LoginComponent, AccountsComponent } from "./components/index"
 import { BuySellApiService, SendReceiveApiService, PortfolioApiService, RewardsApiService, BorrowApiService, AuthApiService } from './services/index'
@@ -25,6 +26,7 @@ import { BuySellApiService, SendReceiveApiService, PortfolioApiService, RewardsA
 		PopupComponent,
 		LoginComponent,
 		AccountsComponent,
+		
 		...AREAS_COMPONENTS],
 	imports: [
 		// vendors
@@ -35,6 +37,7 @@ import { BuySellApiService, SendReceiveApiService, PortfolioApiService, RewardsA
 		BrowserTransferStateModule,
 		AgGridModule,
 		ReactiveFormsModule,
+		ChartsModule,
 		//HighchartsChartModule,
 
 		// app

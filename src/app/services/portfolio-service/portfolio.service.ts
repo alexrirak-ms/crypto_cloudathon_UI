@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { AuthApiService } from '..';
 @Injectable()
@@ -10,15 +10,17 @@ export class PortfolioApiService {
     getUserToken(){
       return this.authApiService.getUserToken();
     }
+    getPortfolioRewardsData(){
+      let userId = this.getUserToken()
+      return this.http.get("https://crypto-banksters-rewards-account.azurewebsites.net/InvestmentAccount/" + userId)
+    }
+    getPortfolioAccountData(){
+      let userId = this.getUserToken()
+      let params = new HttpParams().set("include_values", "True") //hardcoded to True for now, always create a new user
+      return this.http.get("https://crypto-banksters-wallet-api.azurewebsites.net/wallets/user/" + userId, {params: params})
+    }
     
     getPortfolioInitData(param1: any){
-        //not actually required
-        // @ts-ignore
-        const httpOptions = {
-            headers: new HttpHeaders({
-              'Content-Type':  'application/json'
-            })
-          };
         var postData = {
             "param1": param1
         }

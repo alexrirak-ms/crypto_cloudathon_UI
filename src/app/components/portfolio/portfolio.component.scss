@@ -1,39 +1,64 @@
 @import "vars";
 
 
-:host {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-}
-
-main {
-	display: flex;
-	flex: 1;
-	flex-flow: column;
-	min-height: 100%;
-	margin-top: 5em;
+.container{
+	margin-left: 200px !important;
+	
 }
 
 // sidenav-menu {
 // 	width: $layout-navbar-width-size;
 // 	min-width: $layout-navbar-width-size;
 // }
-footer {
+#portfolio-chart-container{
 	width: 100%;
-	min-height: 64px;
-	
+	min-width: 500px;
+	height: 500px;
+}
+#portfolio-container{
+	margin-left: 100px;
+}
+#assets-div{
 
-	.fa-heart {
-		
-	}
+}
+#assets-top-bar{
+	margin-top: 20px;
+}
+#assets-title{
+	display: inline-block;
+}
+#assets-title>h3{
+	margin-left: 20px;;
+	font-weight: 500;
+}
+#assets-filters{
+	float: right;
+}
+.btn-secondary:hover {
+    color: #fff;
+    background-color: #5c636a;
+    border-color: #565e64;
+}
+.btn-secondary{
+	color: #fff !important;
+}
+.btn{
+	color: #fff !important;
+}
+#assets-table-container{
+	display: block;
 
-	> .container {
-		padding: 0 15px;
-
-		p {
-			text-align: center;
-			margin: 20px 0;
-		}
-	}
+}
+.red-change{
+	color: darkred;
+}
+.green-change{
+	color: green;
+}
+#chart-title{
+	margin-top: 20px;
+	font-weight: 500;
+}
+#chart-title>h4{
+	font-weight: 500;
 }
