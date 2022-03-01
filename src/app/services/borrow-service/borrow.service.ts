@@ -10,7 +10,6 @@ export class BorrowApiService {
     getUserToken(){
       return this.authApiService.getUserToken();
     }
-    
     getBorrowInitData(param1: any){
         //not actually required
         // @ts-ignore
