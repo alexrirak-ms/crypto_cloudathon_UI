@@ -32,7 +32,7 @@ export class PortfolioComponent implements OnInit {
 	rewardsGridInitialized: any = false;
 	walletsGridInitialized: any = false;
 	totalPortfolioValue: any = 0;
-	
+
 	public lineChartData: ChartDataSets[] = [
 		{ data: [65.5, 59, 49, 52, 55, 60, 70.5], label: 'Series A' },
 	  ];
@@ -67,7 +67,7 @@ export class PortfolioComponent implements OnInit {
 	changeDisplayedAssets(){
 		//TODO
 
-		
+
 	}
 	defaultColDef = {
 		resizable: true,
@@ -77,17 +77,17 @@ export class PortfolioComponent implements OnInit {
 	formatter = new Intl.NumberFormat('en-US', {
 		style: 'currency',
 		currency: 'USD',
-	  
+
 	  });
-	
+
 	columnDefs = [
 		{headerName: 'Name', field: 'name'},
 		{headerName: 'Wallet Balance', field: 'balance'},
-		{headerName: 'Total Value', field: 'totalValue', cellRenderer: 
+		{headerName: 'Total Value', field: 'totalValue', cellRenderer:
 		(param:any) =>{
 			return this.formatter.format(param.data.totalValue)
 		}},
-		{headerName: 'Price', field: 'priceData', autoHeight: true,  cellRenderer: 
+		{headerName: 'Price', field: 'priceData', autoHeight: true,  cellRenderer:
 		//@ts-ignore that I technically didn't define "param" as a type
 		function(param){
 			return param.data.formattedPriceData
@@ -116,7 +116,7 @@ export class PortfolioComponent implements OnInit {
 		if (!row || !row.price) return; // || !row.change, eventually
 		let format = ""
 		let price = this.formatter.format(row.price);
-		//@ts-ignore 
+		//@ts-ignore
 		let change:Any = parseFloat(row.change).toFixed(2)
 		let colorClass = ""
 		if (change>0){
@@ -127,15 +127,15 @@ export class PortfolioComponent implements OnInit {
 		change = change + "%"
 		format = "<span>" + price + "</span><br/><span style='" + colorClass + "'>" + change + "</span>"
 		row.formattedPriceData = format;
-		
+
 	}
 
 	accountToAssetData(data: any){
 		if (!data) return;
 		let ret = []
 		for (var d of data){
-			let rowItem = {name: d.name + " (" + d.symbol + ")", balance: parseFloat(d.balances.total_balance).toFixed(4), 
-			price: parseFloat(Math.random()*100+"").toFixed(2), change: parseFloat((Math.random()*10 - 5)+"").toFixed(2), totalValue: 0}
+			let rowItem = {name: d.name + " (" + d.symbol + ")", balance: (parseFloat(d.balances.total_balance)/100000000).toFixed(4),
+			price: parseFloat(30000 + Math.random()*10000+"").toFixed(2), change: parseFloat((Math.random()*10 - 5)+"").toFixed(2), totalValue: 0}
 			//@ts-ignore that i'm putting floats into parse float oh no that's awful better refuse to compile
 			rowItem.totalValue = parseFloat(rowItem.balance * rowItem.price).toFixed(2)
 			this.totalPortfolioValue+=+rowItem.totalValue;
@@ -162,7 +162,7 @@ export class PortfolioComponent implements OnInit {
 			// {name: 'Chainlink (LINK)', balance: '10', price: "43.5", change: '+ 4.93 %'},
 			// {name: 'NuCypher (NU)', balance:'100', price: "1.41", change: '+ 3.19 %'}
 		];
-		
+
 		//Nothing for now
 		this.PortfolioApiService.getPortfolioAccountData().subscribe(
 			data => {
@@ -199,13 +199,13 @@ export class PortfolioComponent implements OnInit {
 				//this.allGridApi.redrawRows();
 				//if (this.rewardsGridApi) this.rewardsGridApi.redrawRows();
 
-			}, 
+			},
 			error => {
 				this.messageModal.show("An error has occured while pulling rewards data")
 				console.log(error)
 			}
 		)
 	}
-	
+
 
 }
