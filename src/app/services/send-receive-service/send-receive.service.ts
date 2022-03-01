@@ -1,15 +1,20 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import { AuthApiService } from '..';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AuthApiService} from '..';
 
 @Injectable()
 export class SendReceiveApiService {
-	constructor(private http: HttpClient, private authApiService: AuthApiService){
+	httpOptions = {
+		headers: new HttpHeaders({'Content-Type': 'application/json'})
+	};
 
-    }
-    getUserToken(){
-      return this.authApiService.getUserToken();
-    }
+	constructor(private http: HttpClient, private authApiService: AuthApiService) {
+
+	}
+
+	getUserToken() {
+		return this.authApiService.getUserToken();
+	}
 
 	getSendReceiveInitData(user: string) {
 		return this.http.get("//crypto-banksters-wallet-api.azurewebsites.net/wallets/user/" + user + "?include_values=True")
@@ -17,5 +22,9 @@ export class SendReceiveApiService {
 
 	getCoinValue(symbol: string) {
 		return this.http.get("//crypto-banksters-wallet-api.azurewebsites.net/conversions/usd-value/" + symbol)
+	}
+
+	createTransaction(data: string) {
+		return this.http.put("//crypto-banksters-wallet-api.azurewebsites.net/transaction", data, this.httpOptions)
 	}
 }
