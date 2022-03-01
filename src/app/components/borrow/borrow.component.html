@@ -22,11 +22,12 @@
 				<ul>Receive Your money and spend it</ul>
 			</li>
 		  </ol>
-
-		  <div class = "div2"> 
+		  <hr class="underline">
 		  <h4>Choose your loan terms : </h4>
+		  <div class = "div1"> 
+		
 		  
-		  <form #it="ngForm" (submit)="onCreateLoan(it)">
+		  <form #it="ngForm">
 			 <div class="d-flex flex-row">
 			<div class="elementName">Loan Amount</div>
 			<div class="form-row">
@@ -44,7 +45,7 @@
 				  <input type="text" class="form-control" placeholder="Coin units">
 				</div>
 				<div class="col">
-					<select  name="coin" ngModel #coin="ngModel">
+					<select name="coin" ngModel #coin="ngModel">
     					<option value="btc">BTC</option>
     					<option value="eth">ETH</option>
 					</select>
@@ -55,7 +56,7 @@
 				  Term length
 				</div>
 				<div class="col">
-					<select  name="year" id="year">
+					<select  name="year" ngModel #year="ngModel">
     					<option value=1>1 Year(s)</option>
     					<option value=2>2 Year(s)</option>
 						<option value=2>3 Years(s)</option>
@@ -65,19 +66,21 @@
 
 			  </div>
 			 </div>
-			 <div class ="d-flex flex-column">
+			 <div class ="d-flex flex-column justify-content-center">
 			 <ag-grid-angular 
-			 style="width: 300px; height: 250px;" 
+			 style="width: 300px; height: 300px;" 
 			 class="ag-theme-alpine"
 			 [rowData]="rowData" 
 			 [columnDefs]="columnDefs">
 			 </ag-grid-angular>
 			</div>
 
+
 		<div style="text-align:center">
-		<button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+		<button type="submit" class="btn btn-primary">Submit</button>
 	  </div>
 		  </form>
+
 
 		</div>
 

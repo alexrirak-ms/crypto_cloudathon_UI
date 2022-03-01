@@ -39,7 +39,7 @@ const routes : Routes = [
 	{
 		path: 'borrow',
 		component: BorrowComponent,
-		canActivate: [NoLoginGuard]
+		canActivate: [UserLoggedInGuard]
 	},
 	{
 		path: 'login',
