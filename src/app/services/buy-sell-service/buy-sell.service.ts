@@ -21,10 +21,10 @@ export class BuySellApiService {
   constructor(
     private http: HttpClient
   ) { }
-    
+
   getBitcoinUSDValue() : Observable<any> {
     console.log('Getting current bitcoin value from conversion API:');
-    return this.http.get(this.coinUSDConversionAPI).pipe(map(data => data))    
+    return this.http.get(this.coinUSDConversionAPI).pipe(map(data => data))
   }
 
   executeTransaction(buySelltransaction: BuySellTransaction, isCurrencyBitcoin: boolean, bitcoinUSDPrice:any): Observable<any> {
@@ -34,8 +34,8 @@ export class BuySellApiService {
         console.log(`Selling bitcoins with total number: "${buySelltransaction.amount }"`);
 
         const walletSellTransaction: WalletSellTransaction = {
-          fromWalletId: 'cd6076fc-e4bc-4f34-800b-1fdf8c64e884',        
-          toAddress: 'BSCBSiUzqnTQgnHrSejfg5ac1syQewExGw',
+          fromWalletId: 'cd6076fc-e4bc-4f34-800b-1fdf8c64e884',
+          toAddress: 'CBxNVXJx1FEHRHLbbDYAngkUbHwfSCinw1',
           amount: parseInt(buySelltransaction.amount) * 100000000
         };
 
@@ -49,15 +49,15 @@ export class BuySellApiService {
         console.log(`satoshiAmount: ${satoshiAmount}`);
 
         const walletSellTransaction: WalletSellTransaction = {
-          fromWalletId: 'cd6076fc-e4bc-4f34-800b-1fdf8c64e884',        
-          toAddress: 'BSCBSiUzqnTQgnHrSejfg5ac1syQewExGw',
+          fromWalletId: 'cd6076fc-e4bc-4f34-800b-1fdf8c64e884',
+          toAddress: 'CBxNVXJx1FEHRHLbbDYAngkUbHwfSCinw1',
           amount: satoshiAmount
         };
 
         console.log(`Amount of $ in satoshi to be sold:"${walletSellTransaction.amount}"`);
 
         return this.http.put(this.walletSellTransactionAPI, walletSellTransaction, this.httpOptions).pipe(map(data => data));
-      } 
+      }
     }
     else {
       if(isCurrencyBitcoin) {
@@ -69,7 +69,7 @@ export class BuySellApiService {
 
         const walletFundTransaction: WalletFundTransaction = {
           // hardcoding values
-          fromWalletId: 'cd6076fc-e4bc-4f34-800b-1fdf8c64e884', 
+          fromWalletId: 'cd6076fc-e4bc-4f34-800b-1fdf8c64e884',
           toAddress: 'BSCBSiUzqnTQgnHrSejfg5ac1syQewExGw',
           amount: satoshiAmount.toString()
         };
@@ -80,20 +80,20 @@ export class BuySellApiService {
       else {
         console.log(`Buying bitcoins for $ amount: ${buySelltransaction.amount }`);
         console.log(`1 bitcoin USD price: ${bitcoinUSDPrice}`);
-        
+
         var satoshiAmount = (Math.round(parseInt(buySelltransaction.amount) * 100000000/bitcoinUSDPrice)/100000000)* 100000000;
 
         console.log(`satoshiAmount: ${satoshiAmount}`);
 
         const walletFundTransaction: WalletFundTransaction = {
           // hardcoding values
-          fromWalletId: 'cd6076fc-e4bc-4f34-800b-1fdf8c64e884', 
+          fromWalletId: 'cd6076fc-e4bc-4f34-800b-1fdf8c64e884',
           toAddress: 'BSCBSiUzqnTQgnHrSejfg5ac1syQewExGw',
-          amount: satoshiAmount.toString() 
+          amount: satoshiAmount.toString()
         };
 
         return this.http.post(this.walletFundTransactionAPI + '/'+ walletFundTransaction.fromWalletId + '/'+ walletFundTransaction.amount,
-          walletFundTransaction, this.httpOptions).pipe(map(data => data))       
+          walletFundTransaction, this.httpOptions).pipe(map(data => data))
       }
     }
   }
