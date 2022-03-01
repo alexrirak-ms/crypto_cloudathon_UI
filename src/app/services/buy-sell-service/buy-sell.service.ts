@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {  map  } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { BuySellTransaction } from '../../models/buyselltransaction';
 import { WalletFundTransaction } from '../../models/walletfundtransaction';
 import { WalletSellTransaction } from '../../models/walletselltransaction';
-
+import { AuthApiService } from '..';
 
 @Injectable()
 export class BuySellApiService {
@@ -19,22 +19,50 @@ export class BuySellApiService {
   };
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authApiService: AuthApiService
   ) { }
+  getHouseWallet(){
+    
+  }
+
+  getUserWallets(symbol: string, prom: any, rej: any){
+    let userId = this.authApiService.getUserToken();
+    this.http.get("https://crypto-banksters-wallet-api.azurewebsites.net/wallets/user/" + userId).subscribe(data => {
+      if (!rej){}
+      try{
+        //@ts-ignore
+        let d = data.filter(q => q.symbol === symbol)[0]
+        return prom(d.wallet_id)
+      }
+      catch(e){
+        console.log(data)
+        console.log("Unable to find wallet with symbol " + symbol)
+        return prom(null)
+      }
+    }, err => {console.log(err); return prom(null)})
+  }
+  
 
   getBitcoinUSDValue() : Observable<any> {
     console.log('Getting current bitcoin value from conversion API:');
     return this.http.get(this.coinUSDConversionAPI).pipe(map(data => data))
   }
 
-  executeTransaction(buySelltransaction: BuySellTransaction, isCurrencyBitcoin: boolean, bitcoinUSDPrice:any): Observable<any> {
+  async executeTransaction(buySelltransaction: BuySellTransaction, isCurrencyBitcoin: boolean, bitcoinUSDPrice:any): Promise<Observable<any>> {
+    var promise = new Promise<string>((prom, rej) => this.getUserWallets("BCY", prom, rej));
+    var fromWallet = await promise;
+    if (!fromWallet){
+      console.log("FromWalletId not found. shut it down")
+      throw throwError("Wallet not found");
+    }
     console.log('Transaction Type:' + buySelltransaction.transactionType);
     if(buySelltransaction.transactionType == 'sell') {
       if(isCurrencyBitcoin) {
         console.log(`Selling bitcoins with total number: "${buySelltransaction.amount }"`);
 
         const walletSellTransaction: WalletSellTransaction = {
-          fromWalletId: 'cd6076fc-e4bc-4f34-800b-1fdf8c64e884',
+          fromWalletId: fromWallet,
           toAddress: 'CBxNVXJx1FEHRHLbbDYAngkUbHwfSCinw1',
           amount: parseInt(buySelltransaction.amount) * 100000000
         };
@@ -49,7 +77,7 @@ export class BuySellApiService {
         console.log(`satoshiAmount: ${satoshiAmount}`);
 
         const walletSellTransaction: WalletSellTransaction = {
-          fromWalletId: 'cd6076fc-e4bc-4f34-800b-1fdf8c64e884',
+          fromWalletId: fromWallet,
           toAddress: 'CBxNVXJx1FEHRHLbbDYAngkUbHwfSCinw1',
           amount: satoshiAmount
         };
@@ -69,7 +97,7 @@ export class BuySellApiService {
 
         const walletFundTransaction: WalletFundTransaction = {
           // hardcoding values
-          fromWalletId: 'cd6076fc-e4bc-4f34-800b-1fdf8c64e884',
+          fromWalletId: fromWallet,
           toAddress: 'BSCBSiUzqnTQgnHrSejfg5ac1syQewExGw',
           amount: satoshiAmount.toString()
         };
@@ -87,7 +115,7 @@ export class BuySellApiService {
 
         const walletFundTransaction: WalletFundTransaction = {
           // hardcoding values
-          fromWalletId: 'cd6076fc-e4bc-4f34-800b-1fdf8c64e884',
+          fromWalletId: fromWallet,
           toAddress: 'BSCBSiUzqnTQgnHrSejfg5ac1syQewExGw',
           amount: satoshiAmount.toString()
         };

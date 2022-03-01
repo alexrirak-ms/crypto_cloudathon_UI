@@ -65,27 +65,40 @@ export class BuySellComponent implements OnInit {
 		this.isCurrencyBitcoin = !this.isCurrencyBitcoin;
 	}
 
-	confirmTransaction(purchaseFrequency:string, transactionType:string): void {
+	async confirmTransaction(purchaseFrequency:string, transactionType:string) {
 		var amount = this.amount;
-		//@ts-ignore
-		this.buySellApiService.executeTransaction({ purchaseFrequency, transactionType, amount } as BuySellTransaction, 
-			this.isCurrencyBitcoin, this.bitcoinUSDPrice)
-		  .subscribe(
-			data => {
-				console.log(`Getting successful transaction API response: ${data}`);
-				this.data = data;
-				this.isTransactionSubmitted = true;
-				this.isTransactionSubmissionSuccess = true;
-				this.isTransactionSubmissionError = false;
-			},
-			error => {
-				console.log(`Getting error response from transaction API: "${error}"`);
-				this.isTransactionSubmitted = true;
-				this.isTransactionSubmissionSuccess = false;
-				this.isTransactionSubmissionError = true;
-				this.messageModal.show("Error occured while processing transation")
-				console.log(error)
-			}
-		)
+		try{
+			(await this.buySellApiService.executeTransaction({ purchaseFrequency, transactionType, amount } as BuySellTransaction, 
+				this.isCurrencyBitcoin, this.bitcoinUSDPrice))
+			  .subscribe(
+				//@ts-ignore
+				data => {
+					console.log(`Getting successful transaction API response: ${data}`);
+					this.data = data;
+					this.isTransactionSubmitted = true;
+					this.isTransactionSubmissionSuccess = true;
+					this.isTransactionSubmissionError = false;
+				},
+							//@ts-ignore
+	
+				error => {
+					console.log(`Getting error response from transaction API: "${error}"`);
+					this.isTransactionSubmitted = true;
+					this.isTransactionSubmissionSuccess = false;
+					this.isTransactionSubmissionError = true;
+					this.messageModal.show("Error occured while processing transation")
+					console.log(error)
+				}
+			)
+		}
+		catch(e){
+			console.log(`Getting error response from transaction API: "${e}"`);
+					this.isTransactionSubmitted = true;
+					this.isTransactionSubmissionSuccess = false;
+					this.isTransactionSubmissionError = true;
+					this.messageModal.show("Error occured while processing transation")
+					console.log(e)
+		}
+		
 	}
 }
