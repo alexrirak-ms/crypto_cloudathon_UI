@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
+import {SendReceiveApiService} from "../../services/index"
 
 //import * as $  from "jquery";
 declare var $: any;
@@ -16,14 +17,14 @@ export class PopupComponent implements OnInit {
 	transactionWarningModal: any;
 	instantPaymentModal: any;
 	sendPaymentModal: any;
-	sendPaymentData :any;
+	sendPaymentData: any;
 	receivePaymentModal: any;
 	receiveAddress: string;
 	receiveBalance: number;
 	name: string;
 	paymentType: string;
 
-	constructor() {
+	constructor(private SendReceiveApiService: SendReceiveApiService) {
 	}
 
 	ngOnInit() {
@@ -54,7 +55,7 @@ export class PopupComponent implements OnInit {
 		$("#popup-modal").modal("show")
 	}
 
-	showTransactionWarningModal(receiveAddress:string, receiveBalance:number) {
+	showTransactionWarningModal(receiveAddress: string, receiveBalance: number) {
 		this.resetModalTypes()
 		this.transactionWarningModal = true;
 		this.receiveAddress = receiveAddress;
@@ -62,7 +63,7 @@ export class PopupComponent implements OnInit {
 		$("#popup-modal").modal("show")
 	}
 
-	showInstantPaymentModalModal(paymentType: string, sendPaymentData:any = null) {
+	showInstantPaymentModalModal(paymentType: string, sendPaymentData: any = null) {
 		this.resetModalTypes()
 		this.instantPaymentModal = true;
 		this.paymentType = paymentType;
@@ -83,11 +84,29 @@ export class PopupComponent implements OnInit {
 	}
 
 	instantPaymentConfirm(paymentType: string) {
-		if(paymentType == 'send') {
+		if (paymentType == 'send') {
 			this.showSendPaymentModal();
-		} else if(paymentType == 'receive') {
+		} else if (paymentType == 'receive') {
 			this.showReceivePaymentModal();
 		}
+	}
+
+	submitPayment() {
+
+		var body: any = {
+			"fromWalletId": this.sendPaymentData['fromAddressId'],
+			"toAddress": this.sendPaymentData['toAddress'],
+			"amount": this.sendPaymentData['coinAmount']
+		}
+		this.SendReceiveApiService.createTransaction(body).subscribe(
+			data => {
+				console.log(data);
+				this.show("Your payment has been submitted. Transaction id: " + data['transaction_id' as keyof typeof data],"Success");
+			}, () => {
+				this.show("Thee was an error processing your request. Please try again.");
+			}
+		);
+
 	}
 
 	//default
