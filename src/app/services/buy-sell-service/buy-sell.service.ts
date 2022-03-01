@@ -10,9 +10,9 @@ import { AuthApiService } from '..';
 @Injectable()
 export class BuySellApiService {
 
-  private walletSellTransactionAPI = 'http://crypto-banksters-wallet-api.azurewebsites.net/transaction';
-  private walletFundTransactionAPI = 'http://crypto-banksters-wallet-api.azurewebsites.net/transaction/fund';
-  private coinUSDConversionAPI = 'http://crypto-banksters-wallet-api.azurewebsites.net/conversions/usd-value/bcy';
+  private walletSellTransactionAPI = 'https://crypto-banksters-wallet-api.azurewebsites.net/transaction';
+  private walletFundTransactionAPI = 'https://crypto-banksters-wallet-api.azurewebsites.net/transaction/fund';
+  private coinUSDConversionAPI = 'https://crypto-banksters-wallet-api.azurewebsites.net/conversions/usd-value/bcy';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,7 +23,7 @@ export class BuySellApiService {
     private authApiService: AuthApiService
   ) { }
   getHouseWallet(){
-    
+
   }
 
   getUserWallets(symbol: string, prom: any, rej: any){
@@ -42,7 +42,7 @@ export class BuySellApiService {
       }
     }, err => {console.log(err); return prom(null)})
   }
-  
+
 
   getBitcoinUSDValue() : Observable<any> {
     console.log('Getting current bitcoin value from conversion API:');
