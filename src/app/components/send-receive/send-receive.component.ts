@@ -30,7 +30,7 @@ export class SendReceiveComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.SendReceiveApiService.getSendReceiveInitData(this.SendReceiveApiService.getUserToken()['user_id']).subscribe(
+		this.SendReceiveApiService.getSendReceiveInitData(this.SendReceiveApiService.getUserToken()).subscribe(
 			data => {
 				this.data = data;
 				console.log(data);
